@@ -10,7 +10,19 @@ function Footer({ isDarkMode }) {
 
   return (
     <footer style={footerStyle}>
-      <p>&copy; {new Date().getFullYear()} Expert Automotive. All rights reserved.</p>
+      <div className="footer-content">
+        <h3>Our Program</h3>
+        <ul className="schedule">
+          <li><strong>Monday:</strong> 8am - 5pm </li>
+          <li><strong>Tuesday:</strong> 8am - 5pm </li>
+          <li><strong>Wednesday:</strong> 8am - 5pm </li>
+          <li><strong>Thursday:</strong> 8 am - 5pm </li>
+          <li><strong>Friday:</strong> 9am - 5pm </li>
+          <li><strong>Saturday:</strong> 9am - 1pm </li>
+          <li><strong>Sunday:</strong> Closed</li>
+        </ul>
+        <p>&copy; {new Date().getFullYear()} Expert Automotive. All rights reserved.</p>
+      </div>
     </footer>
   );
 }
