@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../assets/logo.jpg"; // Adjust the path if needed
 
@@ -6,11 +6,13 @@ function Navbar({ isDarkMode, toggleTheme }) {
   return (
     <nav className={`navbar ${isDarkMode ? "dark" : ""}`}>
       <div className="navbar-logo">
-        <img
-          src={logo}
-          alt="Expert Automotive Logo"
-          style={{ height: "60px", cursor: "pointer" }}
-        />
+        <Link to="/">
+          <img
+            src={logo}
+            alt="Expert Automotive Logo"
+            style={{ height: "60px", cursor: "pointer" }}
+          />
+        </Link>
       </div>
       <ul className="navbar-links">
         <li>
