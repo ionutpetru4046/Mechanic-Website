@@ -1,39 +1,29 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 import { useState } from "react";
-import Navbar from "./NavBar";
-import Footer from "./Footer"; // Import Footer
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  const appStyle = {
-    backgroundColor: isDarkMode ? "#1a1a1a" : "#f2f2f2",
-    color: isDarkMode ? "#f2f2f2" : "#1a1a1a",
-    height: "100vh",
-    margin: 0,
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-    transition: "all 0.3s ease",
-    backgroundImage: 'url("/image5.avif")',
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    zIndex: 1, // Add this line
-  };
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   return (
-    <div style={appStyle}>
-      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      <main style={{ padding: "2rem", flex: 1 }}>
-        
-      </main>
-      <Footer isDarkMode={isDarkMode} /> {/* Render Footer only once here */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
-// the app component is the main component of the application

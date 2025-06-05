@@ -1,22 +1,18 @@
-function Navbar({ isDarkMode, toggleTheme }) {
-  const navbarStyle = {
-    padding: "1rem 2rem",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: isDarkMode ? "#333" : "#e2e2e2",
-    color: isDarkMode ? "#f2f2f2" : "#1a1a1a",
-  };
+import { NavLink } from "react-router-dom";
+import "./Navbar.css"; // create this file
 
+function Navbar({ isDarkMode, toggleTheme }) {
   return (
-    <nav style={navbarStyle}>
-      <img
-        src="/expert automotive.jpg"
-        alt="MechanicPro Logo"
-        style={{ height: "80px", cursor: "pointer", borderRadius: "60%", hover: { transform: "scale(1.8)" } }}
-        />
-        <button style={{ padding: "10px", cursor: "pointer" }} onClick={toggleTheme}>
-        Switch to {isDarkMode ? "Light" : "Dark"} Mode
+    <nav className={`navbar ${isDarkMode ? "dark" : ""}`}>
+      <div className="navbar-logo">MechanicPro</div>
+      <ul className="navbar-links">
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/about">About</NavLink></li>
+        <li><NavLink to="/services">Services</NavLink></li>
+        <li><NavLink to="/contact">Contact</NavLink></li>
+      </ul>
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {isDarkMode ? "Light" : "Dark"} Mode
       </button>
     </nav>
   );

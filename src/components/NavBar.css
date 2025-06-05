@@ -1,0 +1,52 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #f2f2f2;
+  flex-wrap: wrap;
+}
+
+.navbar.dark {
+  background: #222;
+  color: white;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.theme-toggle {
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  .theme-toggle {
+    align-self: flex-end;
+  }
+}
