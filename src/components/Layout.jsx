@@ -7,7 +7,7 @@ function Layout({ isDarkMode, toggleTheme }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      <main style={{ flex: 1, padding: "2rem" }}>
+      <main style={{ flex: 1, }}>
         <Outlet />
       </main>
       <Footer isDarkMode={isDarkMode} />
