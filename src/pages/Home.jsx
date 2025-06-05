@@ -2,7 +2,7 @@ function Home() {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "65vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
