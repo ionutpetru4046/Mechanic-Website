@@ -1,0 +1,7 @@
+/* index.css or Layout.css */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 100%;
+}

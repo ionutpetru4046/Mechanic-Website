@@ -1,3 +1,5 @@
+import "./Footer.css";
+
 function Footer({ isDarkMode }) {
   const footerStyle = {
     padding: "1rem",

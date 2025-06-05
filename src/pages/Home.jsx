@@ -1,5 +1,5 @@
 function Home() {
-  return <h1>🏠 Welcome to MechanicPro!</h1>;
+  return <h1 style={{ textAlign: "center" }}>🏠 Welcome to Expert Automotive!</h1>;
 }
 
 export default Home;

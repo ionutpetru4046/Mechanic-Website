@@ -4,7 +4,7 @@ import "./Navbar.css"; // create this file
 function Navbar({ isDarkMode, toggleTheme }) {
   return (
     <nav className={`navbar ${isDarkMode ? "dark" : ""}`}>
-      <div className="navbar-logo">MechanicPro</div>
+      <div className="navbar-logo">Expert Automotive</div>
       <ul className="navbar-links">
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>

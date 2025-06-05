@@ -1,5 +1,5 @@
 function About() {
-  return <h1>ℹ️ About Our Garage</h1>;
+  return <h1 style={{ textAlign: "center" }}>ℹ️ About Our Garage</h1>;
 }
 
 export default About;
