@@ -1,0 +1,23 @@
+.contact-page {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.contact-info {
+  margin-bottom: 2rem;
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.contact-info p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.map-container iframe {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
