@@ -4,7 +4,7 @@ import "./Contact.css";
 function Contact() {
   return (
     <div className="contact-page">
-      <h1 style={{ textAlign: "center" }}>📞 Contact Us</h1>
+      <h2 style={{ textAlign: "center" }}>📞 Contact Us</h2>
       <div className="contact-info">
         <p><strong>Email:</strong> contact@expertautomotive.com</p>
         <p><strong>Phone:</strong> 0877113822</p>
