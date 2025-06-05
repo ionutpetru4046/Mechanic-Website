@@ -37,7 +37,7 @@ const services = [
 function Services() {
   return (
     <div className="services-page">
-      <h2>Our Services</h2>
+      <h2 style={{ textAlign: "center" }}>🛠️ Services We Offer</h2>
       <div className="services-list">
         {services.map((service, index) => (
           <div className="service-card" key={index}>

@@ -46,6 +46,11 @@
   color: inherit;
 }
 
+.navbar-links li a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .theme-toggle {
   padding: 0.5rem 1rem;
   margin-top: 0.5rem;
