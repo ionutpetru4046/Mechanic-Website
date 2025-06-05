@@ -1,3 +1,21 @@
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.navbar-logo img {
+  height: 60px;
+  width: auto;
+  border-radius: 15px; /* Optional: rounded corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Optional: subtle shadow */
+  transition: transform 0.2s;
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.05);
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -31,6 +49,7 @@
 .theme-toggle {
   padding: 0.5rem 1rem;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 /* Responsive for small screens */
