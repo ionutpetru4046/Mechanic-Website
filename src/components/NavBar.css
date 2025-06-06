@@ -60,6 +60,12 @@
   padding: 0.5rem 1rem;
   margin-top: 0.5rem;
   cursor: pointer;
+  border-radius: 10px;
+}
+
+.theme-toggle:hover {
+  background: brown;
+  color: white;
 }
 
 /* Responsive for small screens */
