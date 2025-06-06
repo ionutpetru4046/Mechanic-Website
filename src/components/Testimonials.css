@@ -1,0 +1,37 @@
+.testimonials {
+    padding: 4rem 2rem;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.testimonials h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.testimonial-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.testimonial-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review {
+    font-style: italic;
+    color: #555;
+}
+
+.name {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #111;
+}

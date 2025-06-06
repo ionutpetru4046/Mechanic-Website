@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./Layout.css";
 import Footer from "./Footer";
+import Testimonials from "./Testimonials";
 
 function Layout({ isDarkMode, toggleTheme }) {
   return (
@@ -10,6 +11,7 @@ function Layout({ isDarkMode, toggleTheme }) {
       <main style={{ flex: 1, }}>
         <Outlet />
       </main>
+      <Testimonials />
       <Footer isDarkMode={isDarkMode} />
     </div>
   );
