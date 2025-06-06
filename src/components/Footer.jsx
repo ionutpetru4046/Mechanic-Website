@@ -18,7 +18,7 @@ function Footer({ isDarkMode }) {
         {/* Logo + Description */}
         <div className="footer-section">
           <h3 className="footer-logo">Expert Automotive</h3>
-          <p>Your trusted mechanic in town</p>
+          <p>Your trusted mechanic in Town</p>
         </div>
 
         {/* Quick Links */}

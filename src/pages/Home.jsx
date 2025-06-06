@@ -51,12 +51,14 @@ function Home() {
       >
         <h1
           style={{
+            lineHeight: "70px",
             textAlign: "center",
             color: "#fff",
             textShadow: "2px 2px 8px #000",
           }}
         >
-          🏠 Welcome to Expert Automotive!
+          🏠 Welcome to Expert Automotive! 🏠 <br />
+          🛠️ Your Trusted Mechanic in Town! 🛠️
         </h1>
       </div>
     </div>
