@@ -1,13 +1,13 @@
 .testimonials {
     padding: 4rem 2rem;
-    background-color: #f9f9f9;
+    background-color: lightslategrey;
     text-align: center;
 }
 
 .testimonials h2 {
     margin-bottom: 2rem;
     font-size: 2rem;
-    color: #333;
+    color: #fff;
 }
 
 .testimonial-cards {

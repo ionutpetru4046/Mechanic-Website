@@ -13,6 +13,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <div className={isDarkMode ? "dark" : "light"}>
       <Routes>
         <Route element={<Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}>
           <Route path="/" element={<Home />} />
@@ -22,6 +23,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+    </div>
     </BrowserRouter>
   );
 }
