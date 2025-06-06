@@ -1,24 +1,87 @@
-/* src/components/Footer.css */
-
 .footer {
-  background-color: #222;
-  color: white;
-  padding: 2rem;
-  text-align: center;
+  background-color: #111;
+  color: #eee;
+  padding: 40px 20px;
+  font-family: sans-serif;
 }
 
 .footer-content {
-  max-width: 600px;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
 }
 
+.footer-section {
+  flex: 1 1 250px;
+}
+
+.footer-logo {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-logo:hover {
+  background-color: brown;
+}
+
+.footer-links,
 .schedule {
   list-style: none;
   padding: 0;
-  margin-top: 1rem;
+  margin: 0;
 }
 
+.footer-links li,
 .schedule li {
-  margin: 0.4rem 0;
-  font-size: 1rem;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.social-icons a {
+  font-size: 20px;
+  margin-right: 15px;
+  color: #ccc;
+  transition: 0.2s;
+}
+
+.social-icons a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 14px;
+  border-top: 1px solid #444;
+  margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-section {
+    width: 100%;
+  }
+
+  .social-icons {
+    margin-top: 10px;
+  }
 }
