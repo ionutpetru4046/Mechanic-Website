@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.jpg"; // Adjust the path if needed
+import logo from "../assets/logo.jpg";
 import "./NavBar.css";
 
 function NavBar({ isDarkMode, toggleTheme }) {
@@ -10,7 +10,7 @@ function NavBar({ isDarkMode, toggleTheme }) {
           <img
             src={logo}
             alt="Expert Automotive Logo"
-            style={{ height: "60px", cursor: "pointer" }}
+            style={{ height: "90px", cursor: "pointer" }}
           />
         </Link>
       </div>
