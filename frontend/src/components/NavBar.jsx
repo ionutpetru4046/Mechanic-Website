@@ -1,4 +1,4 @@
-import { Link } from "react-scroll";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.jpg"; // Adjust the path if needed
 import "./NavBar.css";
 
@@ -6,7 +6,7 @@ function NavBar({ isDarkMode, toggleTheme }) {
   return (
     <nav className={`navbar ${isDarkMode ? "dark" : ""}`}>
       <div className="navbar-logo">
-        <Link to="home" smooth={true} duration={500} offset={-70}>
+        <Link to="/">
           <img
             src={logo}
             alt="Expert Automotive Logo"
@@ -16,19 +16,25 @@ function NavBar({ isDarkMode, toggleTheme }) {
       </div>
       <ul className="navbar-links">
         <li>
-          <Link to="home" smooth={true} duration={500} offset={-70}>Home</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="about" smooth={true} duration={500} offset={-70}>About</Link>
+          <Link to="about">About</Link>
         </li>
         <li>
-          <Link to="services" smooth={true} duration={500} offset={-70}>Services</Link>
+          <Link to="services">Services</Link>
         </li>
         <li>
-          <Link to="testimonials" smooth={true} duration={500} offset={-70}>Testimonials</Link>
+          <Link to="testimonials">Testimonials</Link>
         </li>
         <li>
-          <Link to="contact" smooth={true} duration={500} offset={-70}>Contact</Link>
+          <Link to="contact">Contact</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/register">Register</Link>
         </li>
       </ul>
       <button className="theme-toggle" onClick={toggleTheme}>

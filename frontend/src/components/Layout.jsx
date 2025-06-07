@@ -7,11 +7,11 @@ import Footer from "./Footer";
 function Layout({ isDarkMode, toggleTheme }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      <main>
-        <Outlet />
-      </main>
-      <Footer isDarkMode={isDarkMode} />
+       <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />  
+        <main>
+          <Outlet />
+        </main>
+       <Footer isDarkMode={isDarkMode} />
     </div>
   );
 }

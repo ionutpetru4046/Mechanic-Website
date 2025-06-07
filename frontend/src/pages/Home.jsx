@@ -1,15 +1,6 @@
-import { Element } from "react-scroll";
-import Services from "../components/Services";
-import Testimonials from "../components/Testimonials";
-import About from "../components/About";
-import Contact from "../components/Contact";
-import Login from "./Auth/Login";
-import Register from "./Auth/Register";
-
 function Home() {
   return (
-    <>
-    <Element name="home">      
+    <>      
       <div
         style={{
           position: "relative",
@@ -72,29 +63,6 @@ function Home() {
           </h1>
         </div>
       </div>
-      </Element>
-
-       <Element name="about">
-          <About />
-      </Element>
-
-      <Element name="services">
-        <Services />
-      </Element>
-
-      <Element name="testimonials">
-        <Testimonials />
-      </Element>
-
-      <Element name="contact">
-        <Contact />  
-       </Element>
-       <Element name="Login">
-        <Login />  
-       </Element>
-       <Element name="Register">
-        <Register />  
-       </Element>
     </>
   );
 }

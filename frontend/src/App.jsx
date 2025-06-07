@@ -6,6 +6,11 @@ import NotFound from "./components/NotFound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
+import Services from "./components/Services";
+import Testimonials from "./components/Testimonials";
+import About from "./components/About";
+import Contact from "./components/Contact";
+
 
 
 function App() {
@@ -21,6 +26,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/contact" element={<Contact />} />
 
           {/* Optional: 404 page */}
           <Route path="*" element={<NotFound />} />
