@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import "./NavBar.css";
 
-function NavBar({ isDarkMode, toggleTheme }) {
+function NavBar({ isDarkMode, }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -31,9 +31,6 @@ function NavBar({ isDarkMode, toggleTheme }) {
       <div className="navbar-actions">
         <Link to="/login" className="authButton">Login</Link>
         <Link to="/register" className="authButton">Register</Link>
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {isDarkMode ? "Light" : "Dark"} Mode
-        </button>
       </div>
 
       {/* Hamburger Button */}
