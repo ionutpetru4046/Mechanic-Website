@@ -30,7 +30,7 @@
 
 .authButton:hover,
 .authButton:focus {
-  background: #125ea2;
+  background: blue;
   color: #ffd700 !important;
   box-shadow: 0 4px 16px rgba(25, 118, 210, 0.15);
 }
@@ -44,6 +44,7 @@
   font-weight: bold;
   text-decoration: none;
   color: inherit;
+  font-size: 20px;
   transition: text-decoration 0.2s, color 0.2s;
 }
 
