@@ -180,4 +180,21 @@
   }
 }
 
+/* Ensure mobile menu background and link color are correct in dark mode */
+@media (max-width: 900px) {
+  .navbar.dark .navbar-links {
+    background: #222;
+  }
+  .navbar.dark .navbar-links a {
+    color: #fff;
+  }
+  .navbar.dark .navbar-links a:hover {
+    color: #ffd700;
+  }
+}
+
+.navbar.dark .bar {
+  background-color: #fff;
+}
+
 /* ...keep your .authButton and other styles as they are... */
