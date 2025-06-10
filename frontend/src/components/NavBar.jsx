@@ -18,27 +18,33 @@ function NavBar({ isDarkMode, toggleTheme }) {
         </Link>
       </div>
 
-      {/* Hamburger Button */}
-      <button
-        className="hamburger"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="Toggle Menu"
-      >
-        ☰
-      </button>
-
+      {/* Centered Links */}
       <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="about">About</Link></li>
         <li><Link to="services">Services</Link></li>
         <li><Link to="testimonials">Testimonials</Link></li>
         <li><Link to="contact">Contact</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/register">Register</Link></li>
       </ul>
 
-      <button className="theme-toggle" onClick={toggleTheme}>
-        {isDarkMode ? "Light" : "Dark"} Mode
+      {/* Right Side Actions */}
+      <div className="navbar-actions">
+        <Link to="/login" className="authButton">Login</Link>
+        <Link to="/register" className="authButton">Register</Link>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {isDarkMode ? "Light" : "Dark"} Mode
+        </button>
+      </div>
+
+      {/* Hamburger Button */}
+      <button
+        className="hamburger"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        aria-label="Toggle Menu"
+      >
+        <span className="bar" />
+        <span className="bar" />
+        <span className="bar" />
       </button>
     </nav>
   );
