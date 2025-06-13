@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.jpg";
+import { useAuth } from "../context/authContext";
 import "./NavBar.css";
 
-function NavBar({ isDarkMode, }) {
+function NavBar() {
+  const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className={`navbar ${isDarkMode ? "dark" : ""}`}>
+    <nav className={`navbar`}>
       <div className="navbar-logo">
         <Link to="/">
           <img
@@ -21,20 +23,24 @@ function NavBar({ isDarkMode, }) {
       {/* Centered Links */}
       <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="about">About</Link></li>
-        <li><Link to="services">Services</Link></li>
-        <li><Link to="testimonials">Testimonials</Link></li>
-        <li><Link to="contact">Contact</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/services">Services</Link></li>
+        <li><Link to="/testimonials">Testimonials</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
       </ul>
 
-      {/* Right Side Actions */}
+      {/* Right Side Auth Buttons */}
       <div className="navbar-actions">
-        <Link to="/login" className="authButton">Login</Link>
-        <Link to="/register" className="authButton">Register</Link>
-        <Link to="/book-now" className="authButton">Book Now</Link>
-        <Link to="/my-bookings" className="nav-button">
-          View My Bookings
-        </Link>
+        {!user ? (
+          <>
+            <Link to="/dashboard" className="authButton">Dashboard</Link>
+            <button onClick={logout} className="authButton">Logout</button>
+          </>
+        ) : (
+          <>
+             <Link to="/login" className="authButton">Login</Link>
+             <Link to="/register" className="authButton">Register</Link>          </>
+        )}
       </div>
 
       {/* Hamburger Button */}

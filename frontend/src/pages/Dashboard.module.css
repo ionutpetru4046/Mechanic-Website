@@ -1,131 +1,20 @@
-/* Modern Dashboard Styles */
-.container {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 2rem 0;
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
-}
-
-.content {
-  max-width: 900px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(60, 72, 88, 0.12);
-  padding: 2.5rem 2rem;
-}
-
-.header {
+.actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #1976d2;
-}
-
-.logoutButton {
-  background: #f44336;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.6rem 1.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.logoutButton:hover {
-  background: #d32f2f;
-}
-
-.avatar {
-  width: 90px;
-  height: 90px;
-  background: #1976d2;
-  color: #fff;
-  border-radius: 50%;
-  font-size: 2.5rem;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 0 auto 1.2rem auto;
-  box-shadow: 0 2px 12px rgba(25, 118, 210, 0.15);
+  gap: 1.5rem;
+  margin: 2rem 0;
 }
 
-.welcomeText {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #222;
-  text-align: center;
-  margin-bottom: 0.3rem;
+.actionBtn {
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-.userName {
-  color: #1976d2;
-}
-
-.subText {
-  color: #64748b;
-  font-size: 1rem;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.bookingsSection {
-  margin-top: 2.5rem;
-}
-
-.bookingsTitle {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #1976d2;
-  margin-bottom: 1rem;
-}
-
-.bookingList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.bookingCard {
-  background: #f5f7fa;
-  border-radius: 10px;
-  padding: 1.2rem 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
-  font-size: 1rem;
-}
-
-.loadingContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.loadingSpinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #e3e3e3;
-  border-top: 3px solid #1976d2;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.loadingText {
-  color: #64748b;
-  font-size: 1rem;
+.actionBtn:hover {
+  background-color: #0056b3;
 }

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 
 function Dashboard() {
-  console.log("Dashboard rendered");
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +19,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const VITE_API_URL = import.meta.env.VITE_API_URL;
+
         const userRes = await axios.get(`${VITE_API_URL}/api/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -28,7 +28,6 @@ function Dashboard() {
         const bookingsRes = await axios.get(`${VITE_API_URL}/api/bookings`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("Fetched bookings from backend:", bookingsRes.data);
         setBookings(bookingsRes.data.bookings || []);
       } catch (err) {
         console.error("Dashboard fetch error:", err);
@@ -39,7 +38,7 @@ function Dashboard() {
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [navigate]);
 
@@ -72,6 +71,7 @@ function Dashboard() {
             <span className={styles.logoutIcon}>↪</span> Log Out
           </button>
         </div>
+
         <div className={styles.avatar}>
           {user?.name?.charAt(0).toUpperCase()}
         </div>
@@ -79,6 +79,12 @@ function Dashboard() {
           Welcome back, <span className={styles.userName}>{user?.name}</span>!
         </h2>
         <p className={styles.subText}>You are successfully logged in</p>
+
+        {/* ✅ Add action buttons below welcome */}
+        <div className={styles.actions}>
+          <Link to="/book-now" className={styles.actionBtn}>Book Now</Link>
+          <Link to="/my-bookings" className={styles.actionBtn}>View My Bookings</Link>
+        </div>
 
         <div className={styles.bookingsSection}>
           <div className={styles.bookingsTitle}>Your Bookings</div>
