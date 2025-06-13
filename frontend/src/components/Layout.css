@@ -1,5 +1,22 @@
 /* index.css or Layout.css */
-main {
-  margin: 0 auto;
+/* Prevent horizontal overflow globally */
+html, body {
+  margin: 0;
+  padding: 0;
   width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+  max-width: 100%;
+  overflow-x: hidden;
 }

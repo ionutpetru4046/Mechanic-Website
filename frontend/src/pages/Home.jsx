@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 
 function Home() {
+
+  const navigate = useNavigate();
+
+  const handleBookNow = () => {
+    navigate("/dashboard");
+  }
+
   return (
     <div className={styles.backgroundWrapper}>
       {/* Background image */}
@@ -13,6 +21,11 @@ function Home() {
           🏠 Welcome to Expert Automotive! 🏠 <br />
           🛠️ Your Trusted Mechanic in Town! 🛠️
         </h1>
+        <div>
+        <button className={styles.bookNowButton} onClick={handleBookNow}>
+            Book Now
+        </button>
+        </div>
       </div>
     </div>
   );

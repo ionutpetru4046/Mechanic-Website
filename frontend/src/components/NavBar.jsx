@@ -15,7 +15,7 @@ function NavBar() {
           <img
             src={logo}
             alt="Logo"
-            style={{ height: "90px", cursor: "pointer", borderRadius: "50%" }}
+            style={{ height: "90px", cursor: "pointer", borderRadius: "18%" }}
           />
         </Link>
       </div>
