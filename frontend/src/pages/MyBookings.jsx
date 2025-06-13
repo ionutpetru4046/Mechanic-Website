@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import "./MyBookings.css"; // import CSS file
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [error, setError] = useState("");
-  const [editingBookingId, setEditingBookingId] = useState(null);
-  const [editForm, setEditForm] = useState({ date: "", time: "", service: "", notes: "" });
+  const [editingBooking, setEditingBooking] = useState(null);
+  const [formData, setFormData] = useState({
+    service: "",
+    date: "",
+    time: "",
+    notes: "",
+  });
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -20,15 +26,12 @@ const MyBookings = () => {
     const fetchBookings = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (Array.isArray(res.data)) {
-          setBookings(res.data);
-        } else if (Array.isArray(res.data.bookings)) {
+        if (Array.isArray(res.data.bookings)) {
           setBookings(res.data.bookings);
+          setError("");
         } else {
           setError("Unexpected response from server.");
         }
@@ -54,114 +57,156 @@ const MyBookings = () => {
       });
       setBookings(bookings.filter((b) => b._id !== id));
     } catch (err) {
-      console.error("Failed to delete booking:", err);
-      alert("Could not delete booking");
+      console.error("Error deleting booking:", err);
+      setError("Failed to cancel booking. Please try again.");
     }
   };
 
   const handleEdit = (booking) => {
-    setEditingBookingId(booking._id);
-    setEditForm({
-      date: booking.date?.split("T")[0] || "",
+    setEditingBooking(booking);
+    setFormData({
+      service: booking.service,
+      date: booking.date.slice(0, 10),
       time: booking.time || "",
-      service: booking.service || "",
       notes: booking.notes || "",
     });
   };
 
-  const handleEditChange = (e) => {
-    setEditForm({ ...editForm, [e.target.name]: e.target.value });
+  const cancelEdit = () => {
+    setEditingBooking(null);
+    setFormData({ service: "", date: "", time: "", notes: "" });
+    setError("");
   };
 
-  const handleUpdate = async () => {
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/bookings/${editingBookingId}`,
-        editForm,
+        `${import.meta.env.VITE_API_URL}/api/bookings/${editingBooking._id}`,
+        formData,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      setBookings(
-        bookings.map((b) =>
-          b._id === editingBookingId ? res.data : b
-        )
+      setBookings((prev) =>
+        prev.map((b) => (b._id === editingBooking._id ? res.data : b))
       );
-      setEditingBookingId(null);
+      cancelEdit();
     } catch (err) {
-      console.error("Update failed", err);
-      alert("Failed to update booking");
+      console.error("Error updating booking:", err);
+      setError("Failed to update booking. Please try again.");
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center" }}>My Bookings</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="bookings-container">
+      <h2 className="heading">My Bookings</h2>
 
-      {Array.isArray(bookings) && bookings.length === 0 ? (
-        <p>You have no bookings yet.</p>
+      {error && <p className="error-message">{error}</p>}
+
+      {editingBooking ? (
+        <form onSubmit={handleUpdate} className="edit-form">
+          <h3>Edit Booking</h3>
+          <label className="form-label">
+            Service:
+            <input
+              type="text"
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </label>
+          <label className="form-label">
+            Date:
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </label>
+          <label className="form-label">
+            Time:
+            <input
+              type="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              className="form-input"
+            />
+          </label>
+          <label className="form-label">
+            Notes:
+            <textarea
+              name="notes"
+              value={formData.notes}
+              onChange={handleChange}
+              className="form-textarea"
+            />
+          </label>
+          <div className="form-buttons">
+            <button type="submit" className="btn btn-primary">
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={cancelEdit}
+              className="btn btn-secondary"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      ) : bookings.length === 0 ? (
+        <p className="no-bookings">You have no bookings yet.</p>
       ) : (
-        <ul>
+        <ul className="bookings-list">
           {bookings.map((booking) => (
-            <div key={booking._id} style={{ marginBottom: "1.5rem", borderBottom: "1px solid #ccc", paddingBottom: "1rem" }}>
-              {editingBookingId === booking._id ? (
-                <>
-                  <label>
-                    <strong>Service:</strong>
-                    <input
-                      type="text"
-                      name="service"
-                      value={editForm.service}
-                      onChange={handleEditChange}
-                      style={{ marginLeft: "10px" }}
-                    />
-                  </label><br />
-                  <label>
-                    <strong>Date:</strong>
-                    <input
-                      type="date"
-                      name="date"
-                      value={editForm.date}
-                      onChange={handleEditChange}
-                      style={{ marginLeft: "10px" }}
-                    />
-                  </label><br />
-                  <label>
-                    <strong>Time:</strong>
-                    <input
-                      type="text"
-                      name="time"
-                      value={editForm.time}
-                      onChange={handleEditChange}
-                      style={{ marginLeft: "10px" }}
-                    />
-                  </label><br />
-                  <label>
-                    <strong>Notes:</strong>
-                    <input
-                      type="text"
-                      name="notes"
-                      value={editForm.notes}
-                      onChange={handleEditChange}
-                      style={{ marginLeft: "10px", width: "80%" }}
-                    />
-                  </label><br />
-                  <button onClick={handleUpdate} style={{ marginRight: "10px" }}>Save</button>
-                  <button onClick={() => setEditingBookingId(null)}>Cancel</button>
-                </>
-              ) : (
-                <>
-                  <p><strong>Service:</strong> {booking.service}</p>
-                  <p><strong>Date:</strong> {new Date(booking.date).toLocaleDateString()}</p>
-                  <p><strong>Time:</strong> {booking.time}</p>
-                  {booking.notes && <p><strong>Notes:</strong> {booking.notes}</p>}
-                  <button onClick={() => handleEdit(booking)} style={{ marginRight: "10px" }}>Edit</button>
-                  <button onClick={() => handleDelete(booking._id)}>Cancel</button>
-                </>
-              )}
-            </div>
+            <li key={booking._id} className="booking-card">
+              <div className="booking-info">
+                <p>
+                  <strong>Service:</strong> {booking.service}
+                </p>
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {new Date(booking.date).toLocaleDateString()}
+                </p>
+                <p>
+                  <strong>Time:</strong> {booking.time || "N/A"}
+                </p>
+                {booking.notes && (
+                  <p>
+                    <strong>Notes:</strong> {booking.notes}
+                  </p>
+                )}
+              </div>
+              <div className="booking-actions">
+                <button
+                  className="btn btn-edit"
+                  onClick={() => handleEdit(booking)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn btn-delete"
+                  onClick={() => handleDelete(booking._id)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </li>
           ))}
         </ul>
       )}
