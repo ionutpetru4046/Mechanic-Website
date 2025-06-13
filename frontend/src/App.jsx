@@ -10,6 +10,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
 import BookNow from "./pages/BookNow";
+import MyBookings from "./pages/MyBookings";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/book-now" element={<BookNow />} />
+        <Route path="/my-bookings" element={<MyBookings />} />
         {/* Add a 404 page if you want */}
       </Routes>
       <Footer />

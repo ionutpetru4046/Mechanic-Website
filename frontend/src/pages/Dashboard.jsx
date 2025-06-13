@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Dashboard.module.css";
+import { useAuth } from "../context/authContext";
 
 function Dashboard() {
+  const { logout } = useAuth();
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,6 +18,7 @@ function Dashboard() {
       navigate("/login");
       return;
     }
+
     const fetchData = async () => {
       try {
         const VITE_API_URL = import.meta.env.VITE_API_URL;
@@ -43,51 +46,65 @@ function Dashboard() {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    logout();
     navigate("/login");
   };
 
-  if (loading)
+  if (loading) {
     return (
       <div className={styles.loadingContainer}>
         <div className={styles.loadingSpinner}></div>
         <p className={styles.loadingText}>Loading dashboard...</p>
       </div>
     );
+  }
 
-  if (error)
+  if (error) {
     return (
       <div className={styles.loadingContainer}>
         <p className={styles.loadingText}>{error}</p>
       </div>
     );
+  }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Dashboard</h1>
-          <button onClick={handleLogout} className={styles.logoutButton}>
-            <span className={styles.logoutIcon}>↪</span> Log Out
-          </button>
-        </div>
+    <div className={styles["dashboard-container"]}>
+      {/* Sidebar */}
+      <aside className={styles.sidebar}>
+        <h2>Dashboard</h2>
+        <ul>
+          <li>
+            <Link to="/book-now">Book Now</Link>
+          </li>
+          <li>
+            <Link to="/my-bookings">My Bookings</Link>
+          </li>
+          <li onClick={handleLogout}>Log Out</li>
+        </ul>
+      </aside>
 
-        <div className={styles.avatar}>
-          {user?.name?.charAt(0).toUpperCase()}
-        </div>
-        <h2 className={styles.welcomeText}>
-          Welcome back, <span className={styles.userName}>{user?.name}</span>!
-        </h2>
-        <p className={styles.subText}>You are successfully logged in</p>
+      {/* Main Content */}
+      <main className={styles["main-content"]}>
+        <header className={styles["dashboard-header"]}>
+          <h1>Welcome back, {user?.name}!</h1>
+          <p>You are successfully logged in.</p>
+        </header>
 
-        {/* ✅ Add action buttons below welcome */}
-        <div className={styles.actions}>
-          <Link to="/book-now" className={styles.actionBtn}>Book Now</Link>
-          <Link to="/my-bookings" className={styles.actionBtn}>View My Bookings</Link>
-        </div>
+        {/* Cards or Info */}
+        <section className={styles["dashboard-cards"]}>
+          <div className={styles.card}>
+            <h3>Total Bookings</h3>
+            <p>{bookings.length}</p>
+          </div>
+          <div className={styles.card}>
+            <h3>Account</h3>
+            <p>{user?.email}</p>
+          </div>
+        </section>
 
-        <div className={styles.bookingsSection}>
-          <div className={styles.bookingsTitle}>Your Bookings</div>
+        {/* Bookings List */}
+        <section className={styles.bookingsSection}>
+          <h2>Your Bookings</h2>
           <ul className={styles.bookingList}>
             {bookings.length === 0 ? (
               <li>No bookings found.</li>
@@ -101,8 +118,8 @@ function Dashboard() {
               ))
             )}
           </ul>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }
