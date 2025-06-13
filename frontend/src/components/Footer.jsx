@@ -13,8 +13,9 @@ export function Footer() {
             <div>
               <h3 className="brand-name">Expert Automotive</h3>
               <p className="company-description">
-                Building the future with innovative solutions and cutting-edge technology. Join us on our journey to
-                transform ideas into reality.
+                Always focusing on the customer 
+                needs always a good choice booking 
+                with Expert Automotive.
               </p>
             </div>
 
