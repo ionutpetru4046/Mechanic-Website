@@ -65,6 +65,9 @@ const Register = () => {
                     <button type="submit" style={styles.button}>
                         Create Account
                     </button>
+                    <button style={styles.button} onClick={() => navigate("/")}>
+                        Go to Home Page
+                    </button>
                 </form>
             </div>
         </div>

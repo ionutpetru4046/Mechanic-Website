@@ -2,8 +2,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
-import bookingRoutes from "./routes/bookingRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
+import userRoutes from "./routes/users.js";
+import bookingRouter from "./routes/bookings.js"
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -22,7 +22,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 // booking routes
-app.use("/api/bookings", bookingRoutes);
+app.use("/api/bookings", bookingRouter);
 
 // Test route to check server is working
 app.get("/", (req, res) => {

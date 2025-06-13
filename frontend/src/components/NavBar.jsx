@@ -31,6 +31,10 @@ function NavBar({ isDarkMode, }) {
       <div className="navbar-actions">
         <Link to="/login" className="authButton">Login</Link>
         <Link to="/register" className="authButton">Register</Link>
+        <Link to="/book-now" className="authButton">Book Now</Link>
+        <Link to="/my-bookings" className="nav-button">
+          View My Bookings
+        </Link>
       </div>
 
       {/* Hamburger Button */}

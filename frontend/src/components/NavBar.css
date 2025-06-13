@@ -168,6 +168,15 @@
     position: relative;
     z-index: 1100;
   }
+   /* Smaller buttons for mobile */
+  .authButton {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
 
 /* Hide navbar-actions on mobile when menu is open (optional, for cleaner look) */

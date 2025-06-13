@@ -1,0 +1,79 @@
+.formCard {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(60, 72, 88, 0.12);
+  padding: 2rem 2rem 1.5rem 2rem;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.formTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1976d2;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputLabel {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.input,
+.textarea {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #c3cfe2;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border 0.2s;
+  background: #f5f7fa;
+  outline: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #1976d2;
+  background: #fff;
+}
+
+.button {
+  width: 100%;
+  padding: 0.8rem 0;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+
+.button:hover {
+  background: #125ea2;
+}
+
+.message {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.error {
+  color: #f44336;
+}
+
+.success {
+  color: #388e3c;
+}
