@@ -25,7 +25,10 @@
   outline: none;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
 }
 
 .authButton:hover,
@@ -45,7 +48,9 @@
   text-decoration: none;
   color: inherit;
   font-size: 20px;
-  transition: text-decoration 0.2s, color 0.2s;
+  transition:
+    text-decoration 0.2s,
+    color 0.2s;
 }
 
 /* Underline on hover */
@@ -147,7 +152,7 @@
     width: 100vw;
     padding: 2rem 0 1rem 0;
     display: none;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
     z-index: 1000;
   }
   .navbar-links.active {
@@ -168,7 +173,7 @@
     position: relative;
     z-index: 1100;
   }
-   /* Smaller buttons for mobile */
+  /* Smaller buttons for mobile */
   .authButton {
     font-size: 14px;
     padding: 6px 10px;

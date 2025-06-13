@@ -4,7 +4,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.js\"",
+    "lint:fix": "eslint --fix ."
   },
   "keywords": [],
   "author": "",
@@ -16,5 +19,11 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
+    "prettier": "^3.5.3"
   }
 }

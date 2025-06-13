@@ -1,13 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import styles from "./Home.module.css";
+import { useNavigate } from 'react-router-dom';
+import styles from './Home.module.css';
 
 function Home() {
-
   const navigate = useNavigate();
 
   const handleBookNow = () => {
-    navigate("/dashboard");
-  }
+    navigate('/dashboard');
+  };
 
   return (
     <div className={styles.backgroundWrapper}>
@@ -22,9 +21,9 @@ function Home() {
           🛠️ Your Trusted Mechanic in Town! 🛠️
         </h1>
         <div>
-        <button className={styles.bookNowButton} onClick={handleBookNow}>
+          <button className={styles.bookNowButton} onClick={handleBookNow}>
             Book Now
-        </button>
+          </button>
         </div>
       </div>
     </div>

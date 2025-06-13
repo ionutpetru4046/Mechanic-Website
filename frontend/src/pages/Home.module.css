@@ -10,7 +10,7 @@
 }
 
 .backgroundImage {
-  background-image: url("/background-image.avif"); /* replace with actual image path */
+  background-image: url('/background-image.avif'); /* replace with actual image path */
   background-size: cover;
   background-position: center;
   position: absolute;
@@ -33,7 +33,7 @@
   color: white;
   max-width: 90%;
 
-   /* Animation */
+  /* Animation */
   opacity: 0;
   transform: translateY(30px);
   animation: fadeSlideUp 1s ease-out forwards;
@@ -59,8 +59,6 @@
 .bookNowButton:hover {
   background-color: #e64a19;
 }
-
-
 
 /* Animation keyframes */
 @keyframes fadeSlideUp {

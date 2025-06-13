@@ -1,25 +1,26 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function BookingList() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (!token) return;
 
-    axios.get("http://localhost:5000/api/bookings", {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-    .then(res => {
-      setBookings(res.data);
-      setLoading(false);
-    })
-    .catch(() => {
-      setBookings([]);
-      setLoading(false);
-    });
+    axios
+      .get('http://localhost:5000/api/bookings', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setBookings(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setBookings([]);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) return <p>Loading bookings...</p>;
@@ -28,7 +29,7 @@ function BookingList() {
 
   return (
     <ul>
-      {bookings.map(booking => (
+      {bookings.map((booking) => (
         <li key={booking._id}>
           {booking.service} on {booking.date} at {booking.time}
           {booking.notes && ` — Notes: ${booking.notes}`}

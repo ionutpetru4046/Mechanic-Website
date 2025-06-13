@@ -1,16 +1,14 @@
-/* eslint-disable no-undef */
 // /* eslint-disable no-unused-vars */
 // /* eslint-disable no-undef */
 
-
-import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
+    expiresIn: '7d',
   });
 };
 
@@ -24,7 +22,7 @@ const registerUser = async (req, res) => {
     // Check if user exists
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ message: 'User already exists' });
     }
 
     // Hash password
@@ -46,8 +44,8 @@ const registerUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } catch (error) {
-    console.error("Register error:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error('Register error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
@@ -69,11 +67,11 @@ const loginUser = async (req, res) => {
         token: generateToken(user._id),
       });
     } else {
-      res.status(401).json({ message: "Invalid credentials" });
+      res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 

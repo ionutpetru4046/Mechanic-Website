@@ -1,13 +1,20 @@
-import "./Contact.css";
+import './Contact.css';
 
 function Contact() {
   return (
     <div className="contact-page">
-      <h2 style={{ textAlign: "center" }}>📞 Contact Us</h2>
+      <h2 style={{ textAlign: 'center' }}>📞 Contact Us</h2>
       <div className="contact-info">
-        <p><strong>Email:</strong> contact@expertautomotive.com</p>
-        <p><strong>Phone:</strong> 0877113822</p>
-        <p><strong>Address:</strong> 59B Dorset Street Lower, Phibsborough, Dublin 1, D01 C5R3</p>
+        <p>
+          <strong>Email:</strong> contact@expertautomotive.com
+        </p>
+        <p>
+          <strong>Phone:</strong> 0877113822
+        </p>
+        <p>
+          <strong>Address:</strong> 59B Dorset Street Lower, Phibsborough,
+          Dublin 1, D01 C5R3
+        </p>
       </div>
 
       <div className="map-container">

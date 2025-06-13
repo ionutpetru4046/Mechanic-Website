@@ -1,46 +1,49 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router";
-import "./MyBookings.css"; // import CSS file
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
+import './MyBookings.css'; // import CSS file
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [editingBooking, setEditingBooking] = useState(null);
   const [formData, setFormData] = useState({
-    service: "",
-    date: "",
-    time: "",
-    notes: "",
+    service: '',
+    date: '',
+    time: '',
+    notes: '',
   });
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     if (!token) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
     const fetchBookings = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/bookings`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/bookings`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
 
         if (Array.isArray(res.data.bookings)) {
           setBookings(res.data.bookings);
-          setError("");
+          setError('');
         } else {
-          setError("Unexpected response from server.");
+          setError('Unexpected response from server.');
         }
       } catch (err) {
-        console.error("Error fetching bookings:", err);
+        console.error('Error fetching bookings:', err);
         if (err.response?.status === 401 || err.response?.status === 403) {
-          navigate("/login");
+          navigate('/login');
         } else {
-          setError("Failed to load bookings. Please try again.");
+          setError('Failed to load bookings. Please try again.');
         }
       }
     };
@@ -49,7 +52,8 @@ const MyBookings = () => {
   }, [navigate, token]);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to cancel this booking?")) return;
+    if (!window.confirm('Are you sure you want to cancel this booking?'))
+      return;
 
     try {
       await axios.delete(`${import.meta.env.VITE_API_URL}/api/bookings/${id}`, {
@@ -57,8 +61,8 @@ const MyBookings = () => {
       });
       setBookings(bookings.filter((b) => b._id !== id));
     } catch (err) {
-      console.error("Error deleting booking:", err);
-      setError("Failed to cancel booking. Please try again.");
+      console.error('Error deleting booking:', err);
+      setError('Failed to cancel booking. Please try again.');
     }
   };
 
@@ -67,15 +71,15 @@ const MyBookings = () => {
     setFormData({
       service: booking.service,
       date: booking.date.slice(0, 10),
-      time: booking.time || "",
-      notes: booking.notes || "",
+      time: booking.time || '',
+      notes: booking.notes || '',
     });
   };
 
   const cancelEdit = () => {
     setEditingBooking(null);
-    setFormData({ service: "", date: "", time: "", notes: "" });
-    setError("");
+    setFormData({ service: '', date: '', time: '', notes: '' });
+    setError('');
   };
 
   const handleChange = (e) => {
@@ -93,16 +97,16 @@ const MyBookings = () => {
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       setBookings((prev) =>
-        prev.map((b) => (b._id === editingBooking._id ? res.data : b))
+        prev.map((b) => (b._id === editingBooking._id ? res.data : b)),
       );
       cancelEdit();
     } catch (err) {
-      console.error("Error updating booking:", err);
-      setError("Failed to update booking. Please try again.");
+      console.error('Error updating booking:', err);
+      setError('Failed to update booking. Please try again.');
     }
   };
 
@@ -180,11 +184,11 @@ const MyBookings = () => {
                   <strong>Service:</strong> {booking.service}
                 </p>
                 <p>
-                  <strong>Date:</strong>{" "}
+                  <strong>Date:</strong>{' '}
                   {new Date(booking.date).toLocaleDateString()}
                 </p>
                 <p>
-                  <strong>Time:</strong> {booking.time || "N/A"}
+                  <strong>Time:</strong> {booking.time || 'N/A'}
                 </p>
                 {booking.notes && (
                   <p>

@@ -1,18 +1,18 @@
-import "./About.css";
+import './About.css';
 
 function About() {
   return (
     <section className="about-section">
-      <h1 style={{ textAlign: "center" }}>ℹ️ About Our Garage</h1>
+      <h1 style={{ textAlign: 'center' }}>ℹ️ About Our Garage</h1>
       <p>
-        Welcome to our mechanic shop! With over 20 years of experience, we provide
-        top-notch car repair and maintenance services.
+        Welcome to our mechanic shop! With over 20 years of experience, we
+        provide top-notch car repair and maintenance services.
       </p>
 
       <h2>Our Mission</h2>
       <p>
-        Our mission is to ensure your vehicle runs safely and smoothly. We prioritize
-        customer satisfaction and quality workmanship above all.
+        Our mission is to ensure your vehicle runs safely and smoothly. We
+        prioritize customer satisfaction and quality workmanship above all.
       </p>
 
       <h2>Why Choose Us?</h2>

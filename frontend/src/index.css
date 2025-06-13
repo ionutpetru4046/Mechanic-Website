@@ -5,9 +5,9 @@
 *::before,
 *::after {
   /* box-sizing:border-box; */
-/* } */ */
-
-html, body {
+/* } */
+*/ html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -15,7 +15,6 @@ html, body {
   overflow-x: hidden;
   font-family: 'Poppins', Arial, sans-serif;
 }
-
 
 /* Dashboard Layout */
 .dashboard-container {

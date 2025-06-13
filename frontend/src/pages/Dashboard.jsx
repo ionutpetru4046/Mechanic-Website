@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import styles from "./Dashboard.module.css";
-import { useAuth } from "../context/authContext";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styles from './Dashboard.module.css';
+import { useAuth } from '../context/authContext';
 
 function Dashboard() {
   const { logout } = useAuth();
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (!token) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -33,10 +33,10 @@ function Dashboard() {
         });
         setBookings(bookingsRes.data.bookings || []);
       } catch (err) {
-        console.error("Dashboard fetch error:", err);
-        setError("Failed to load dashboard data.");
-        localStorage.removeItem("token");
-        navigate("/login");
+        console.error('Dashboard fetch error:', err);
+        setError('Failed to load dashboard data.');
+        localStorage.removeItem('token');
+        navigate('/login');
       } finally {
         setLoading(false);
       }
@@ -47,7 +47,7 @@ function Dashboard() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate('/login');
   };
 
   if (loading) {
@@ -68,7 +68,7 @@ function Dashboard() {
   }
 
   return (
-    <div className={styles["dashboard-container"]}>
+    <div className={styles['dashboard-container']}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
         <h2>Dashboard</h2>
@@ -79,19 +79,23 @@ function Dashboard() {
           <li>
             <Link to="/my-bookings">My Bookings</Link>
           </li>
-          <li onClick={handleLogout}>Log Out</li>
+          <li>
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              Log Out
+            </button>
+          </li>
         </ul>
       </aside>
 
       {/* Main Content */}
-      <main className={styles["main-content"]}>
-        <header className={styles["dashboard-header"]}>
+      <main className={styles['main-content']}>
+        <header className={styles['dashboard-header']}>
           <h1>Welcome back, {user?.name}!</h1>
           <p>You are successfully logged in.</p>
         </header>
 
         {/* Cards or Info */}
-        <section className={styles["dashboard-cards"]}>
+        <section className={styles['dashboard-cards']}>
           <div className={styles.card}>
             <h3>Total Bookings</h3>
             <p>{bookings.length}</p>
@@ -110,10 +114,14 @@ function Dashboard() {
               <li>No bookings found.</li>
             ) : (
               bookings.map((booking) => (
-                <li className={styles.bookingCard} key={booking._id || booking.id}>
-                  <strong>{booking.service}</strong> on {booking.date} at {booking.time}
+                <li
+                  className={styles.bookingCard}
+                  key={booking._id || booking.id}
+                >
+                  <strong>{booking.service}</strong> on {booking.date} at{' '}
+                  {booking.time}
                   <br />
-                  Notes: {booking.notes || "None"}
+                  Notes: {booking.notes || 'None'}
                 </li>
               ))
             )}

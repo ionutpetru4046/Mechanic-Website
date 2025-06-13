@@ -7,7 +7,7 @@ export const createBooking = async (req, res) => {
     const { date, service } = req.body;
 
     const booking = new Booking({
-      user: req.user._id,  // from protect middleware
+      user: req.user._id, // from protect middleware
       date,
       service,
     });

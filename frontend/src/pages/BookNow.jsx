@@ -1,8 +1,8 @@
-import BookingForm from "../components/BookingForm";
+import BookingForm from '../components/BookingForm';
 
 const BookNow = () => {
   return (
-    <div style={{ padding: "40px" }}>
+    <div style={{ padding: '40px' }}>
       <BookingForm />
     </div>
   );
