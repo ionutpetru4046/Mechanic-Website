@@ -2,7 +2,7 @@
 import "./Footer.css";
 import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, MapPin, Phone, ArrowRight } from "lucide-react"
 
-export function ModernFooter() {
+export function Footer() {
   return (
     <footer className="modern-footer">
       {/* Main Footer Content */}
@@ -39,7 +39,7 @@ export function ModernFooter() {
           <div className="nav-section">
             <h4 className="section-title">Quick Links</h4>
             <nav className="nav-list">
-              {["About Us", "Services", "Portfolio", "Careers", "Blog", "Contact"].map((link) => (
+              {["Home", "About Us", "Services", "Careers", "Testimonials", "Contact"].map((link) => (
                 <a key={link} href="#" className="nav-link">
                   {link}
                 </a>
@@ -117,4 +117,4 @@ export function ModernFooter() {
   )
 }
 
-export default ModernFooter;
+export default Footer;

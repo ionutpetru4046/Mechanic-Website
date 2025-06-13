@@ -27,10 +27,8 @@ const Register = () => {
             <div style={styles.formContainer}>
                 <h2 style={styles.title}>Create Account</h2>
                 <p style={styles.subtitle}>Please fill in your details to register</p>
-                
                 <form onSubmit={handleSubmit} style={styles.form}>
                     {error && <p style={styles.error}>{error}</p>}
-                    
                     <div style={styles.inputGroup}>
                         <label style={styles.label}>Full Name</label>
                         <input 
@@ -42,7 +40,6 @@ const Register = () => {
                             style={styles.input}
                         />
                     </div>
-
                     <div style={styles.inputGroup}>
                         <label style={styles.label}>Email</label>
                         <input 
@@ -54,7 +51,6 @@ const Register = () => {
                             style={styles.input}
                         />
                     </div>
-
                     <div style={styles.inputGroup}>
                         <label style={styles.label}>Password</label>
                         <input 
@@ -66,7 +62,6 @@ const Register = () => {
                             style={styles.input}
                         />
                     </div>
-
                     <button type="submit" style={styles.button}>
                         Create Account
                     </button>

@@ -17,6 +17,7 @@ const Login = () => {
         try {
            const res = await axios.post("http://localhost:5000/api/auth/login", form);
            localStorage.setItem("token", res.data.token);
+           console.log("login success, navigating to dashboard");
            navigate("/dashboard");
         } catch (err) {
             setError(err.response?.data?.message || "Login Failed");
@@ -38,8 +39,10 @@ const Login = () => {
                             type="email" 
                             name="email" 
                             placeholder="Enter your email" 
+                            value={form.email}
                             onChange={handleChange} 
                             required 
+                            autoComplete="email"
                             style={styles.input}
                         />
                     </div>
@@ -50,8 +53,10 @@ const Login = () => {
                             type="password" 
                             name="password" 
                             placeholder="Enter your password" 
+                            value={form.password}
                             onChange={handleChange} 
                             required 
+                            autoComplete="current-password"
                             style={styles.input}
                         />
                     </div>

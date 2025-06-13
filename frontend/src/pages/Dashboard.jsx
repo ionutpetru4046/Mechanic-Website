@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,29 +8,31 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+  const token = localStorage.getItem("token");
+  console.log("Token:", token);
+  if (!token) {
+    navigate("/login");
+    return;
+  }
+  const fetchUser = async () => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/api/users/profile`;
+      console.log("Fetching user from", url);
+      const res = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("User data:", res.data);
+      setUser(res.data);
+    } catch (err) {
+      console.error("Fetch user error:", err);
+      localStorage.removeItem("token");
       navigate("/login");
-      return;
     }
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/users/profile`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setUser(res.data);
-      } catch (err) {
-        localStorage.removeItem("token");
-        navigate("/login");
-      }
-    };
-    fetchUser();
-  }, [navigate]);
+  };
+  fetchUser();
+}, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");

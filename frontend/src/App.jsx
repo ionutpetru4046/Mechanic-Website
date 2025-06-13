@@ -11,31 +11,30 @@ import Testimonials from "./components/Testimonials";
 import About from "./components/About";
 import Contact from "./components/Contact";
 
-
-
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   return (
     <BrowserRouter>
-    <div className={isDarkMode ? "dark" : "light"}>
-      <Routes>
-        <Route element={<Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}>
-          <Route index element={<Home />} />          
-          <Route path="/register" element={<Register />} />
+      <div className={isDarkMode ? "dark" : "light"}>
+        <Routes>
+          {/* Auth routes outside Layout */}
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/register" element={<Register />} />
 
-          {/* Optional: 404 page */}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </div>
+          {/* All other routes inside Layout */}
+          <Route element={<Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme} />}>
+            <Route index element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
