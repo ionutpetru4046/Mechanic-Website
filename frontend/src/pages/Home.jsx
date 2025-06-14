@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useNavigate } from 'react-router-dom';
 import styles from './Home.module.css';
 
@@ -16,10 +17,10 @@ function Home() {
       <div className={styles.overlay} />
       {/* Content */}
       <div className={styles.content}>
-        <h1 className={styles.heading}>
-          🏠 Welcome to Expert Automotive! 🏠 <br />
-          🛠️ Your Trusted Mechanic in Town! 🛠️
-        </h1>
+        <h1 className={styles.heading}>Professional Car Repair at Your Fingertips</h1>
+        <p className={styles.paragraph}>
+        🛠️ Your trusted mechanic, now online. Fast. Reliable. Local. 🛠️
+        </p>
         <div>
           <button className={styles.bookNowButton} onClick={handleBookNow}>
             Book Now
