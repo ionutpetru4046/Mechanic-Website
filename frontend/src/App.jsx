@@ -11,6 +11,7 @@ import Register from './pages/Auth/Register';
 import Dashboard from './pages/Dashboard';
 import BookNow from './pages/BookNow';
 import MyBookings from './pages/MyBookings';
+import './index.css';
 
 function App() {
   return (

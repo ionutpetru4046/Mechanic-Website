@@ -80,7 +80,6 @@
 
 .navbar-actions {
   display: flex;
-  align-items: center;
   gap: 10px;
   margin-left: auto;
 }
@@ -211,5 +210,3 @@
 .navbar.dark .bar {
   background-color: #fff;
 }
-
-/* ...keep your .authButton and other styles as they are... */
