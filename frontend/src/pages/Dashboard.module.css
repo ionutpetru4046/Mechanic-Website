@@ -69,3 +69,26 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+
+.logoutButton {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  background: #d32f2f;
+  color: #ffd700;
+  box-shadow: 0 4px 16px rgba(244, 67, 54, 0.15);
+}

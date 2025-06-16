@@ -81,7 +81,7 @@ function Dashboard() {
           </li>
           <li>
             <button onClick={handleLogout} className={styles.logoutButton}>
-              Log Out
+              <span className={styles.logoutIcon}>↪</span> Log Out
             </button>
           </li>
         </ul>
