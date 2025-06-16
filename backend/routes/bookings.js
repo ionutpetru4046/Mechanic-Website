@@ -72,7 +72,7 @@ router.delete('/:id', authenticate, async (req, res) => {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
-    await booking.remove();
+    await booking.deleteOne();
     res.json({ message: 'Booking removed' });
   } catch (err) {
     console.error(err);

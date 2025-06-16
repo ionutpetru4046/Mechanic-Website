@@ -1,4 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './BookingForm.module.css';
 
 function BookingForm() {
@@ -8,6 +10,8 @@ function BookingForm() {
   const [notes, setNotes] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +47,9 @@ function BookingForm() {
       setTime('');
       setNotes('');
       console.log('Booking response:', data);
+
+      navigate('/dashboard');
+
     } catch (err) {
       setError(err.message);
       setSuccess('');
