@@ -1,92 +1,52 @@
 .testimonials {
   padding: 4rem 2rem;
-  background-color: #f9fafb;
-  max-width: 1200px;
-  margin: 0 auto;
+  background-color: #f9f9f9;
+  text-align: center;
 }
 
-.section-title {
-  font-size: 2.25rem;
-  text-align: center;
+.testimonials h2 {
   margin-bottom: 3rem;
-  font-weight: 700;
-  color: #1f2937; /* Dark gray */
+  font-size: 2.5rem;
+  color: #333;
 }
 
 .testimonial-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .testimonial-card {
-  background: #fff;
-  padding: 2rem 1.5rem;
+  background-color: white;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: box-shadow 0.3s ease;
-}
-
-.testimonial-card:hover {
-  box-shadow: 0 12px 28px rgb(0 0 0 / 0.15);
+  padding: 2rem;
+  max-width: 300px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .client-photo {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1rem;
-  border: 3px solid #3b82f6; /* Blue accent */
 }
 
 .review {
   font-style: italic;
-  color: #374151;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  flex-grow: 1;
+  color: #555;
+  margin-bottom: 0.5rem;
 }
 
 .stars {
-  display: flex;
-  gap: 0.2rem;
-  margin-bottom: 1rem;
-  color: #fbbf24; /* Amber/yellow */
-}
-
-.star-filled {
-  color: #fbbf24;
-}
-
-.star-empty {
-  color: #d1d5db; /* Light gray */
+  color: #f39c12; /* gold color for stars */
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .name {
-  font-weight: 600;
-  color: #1f2937;
-  font-size: 1rem;
-  margin-top: auto;
-}
-
-/* Responsive tweak for smaller screens */
-@media (max-width: 480px) {
-  .testimonial-card {
-    padding: 1.5rem 1rem;
-  }
-
-  .client-photo {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-size: 1.75rem;
-  }
+  font-weight: bold;
+  color: #111;
 }
