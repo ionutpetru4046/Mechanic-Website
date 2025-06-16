@@ -108,26 +108,34 @@
 /* RESPONSIVE MEDIA QUERIES */
 /* ------------------------- */
 
-@media (max-width: 768px) {
+/* Phones */
+@media (max-width: 600px) {
   .heading {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .paragraph {
+    font-size: 1.1rem;
   }
 
   .bookNowButton {
-    padding: 12px 24px;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    padding: 10px 20px;
   }
 }
 
-@media (max-width: 480px) {
+/* Tablets */
+@media (max-width: 992px) {
   .heading {
-    font-size: 1.25rem;
+    font-size: 2.5rem;
+  }
+
+  .paragraph {
+    font-size: 1.3rem;
   }
 
   .bookNowButton {
-    width: 100%;
-    max-width: 250px;
-    font-size: 0.9rem;
-    padding: 10px 20px;
+    font-size: 1rem;
+    padding: 12px 25px;
   }
 }
