@@ -5,7 +5,7 @@ import { useAuth } from '../context/authContext';
 import './NavBar.css';
 
 function NavBar() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -41,14 +41,14 @@ function NavBar() {
 
       {/* Right Side Auth Buttons */}
       <div className="navbar-actions">
-        {!user ? (
+        {user ? (
           <>
             <Link to="/dashboard" className="authButton">
               Dashboard
             </Link>
-            <button onClick={logout} className="authButton">
-              Logout
-            </button>
+            <Link to="/register" className="authButton">
+              Register
+            </Link>
           </>
         ) : (
           <>
@@ -57,7 +57,7 @@ function NavBar() {
             </Link>
             <Link to="/register" className="authButton">
               Register
-            </Link>{' '}
+            </Link>
           </>
         )}
       </div>

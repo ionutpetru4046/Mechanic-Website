@@ -113,7 +113,7 @@ function BookingForm() {
         />
       </div>
       <button className={styles.button} type="submit">
-        Book
+        Book Now
       </button>
     </form>
   );

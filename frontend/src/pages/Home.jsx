@@ -6,7 +6,7 @@ function Home() {
   const navigate = useNavigate();
 
   const handleBookNow = () => {
-    navigate('/dashboard');
+    navigate('/book-now');
   };
 
   return (
