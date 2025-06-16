@@ -1,331 +1,230 @@
-:root {
-  --color-slate-900: #0f172a;
-  --color-slate-800: #1e293b;
-  --color-slate-700: #334155;
-  --color-slate-400: #94a3b8;
-  --color-slate-300: #cbd5e1;
-  --color-blue-400: #60a5fa;
-  --color-blue-500: #3b82f6;
-  --color-blue-600: #2563eb;
-  --color-purple-400: #c084fc;
-  --color-purple-500: #a855f7;
-  --color-purple-600: #9333ea;
-  --color-white: #ffffff;
-  --color-transparent: transparent;
-}
-
-/* Fade-in animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Main Footer */
+/* Main container */
 .modern-footer {
-  background: linear-gradient(
-    135deg,
-    var(--color-slate-900) 0%,
-    var(--color-slate-800) 50%,
-    var(--color-slate-900) 100%
-  );
-  color: var(--color-white);
-  padding: 4rem 1.5rem;
-  text-align: center;
-  animation: fadeInUp 1s ease-out both;
-  border-top: 1px solid var(--color-slate-700);
+  background-color: #222;
+  color: #fff;
+  padding: 4rem 2rem 2rem;
+  font-family: 'Poppins', sans-serif;
 }
 
+/* Footer grid layout */
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Grid */
 .footer-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 3rem;
-  margin-bottom: 2rem;
 }
 
-.footer-grid > * {
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.footer-grid > *:nth-child(1) { animation-delay: 0.2s; }
-.footer-grid > *:nth-child(2) { animation-delay: 0.4s; }
-.footer-grid > *:nth-child(3) { animation-delay: 0.6s; }
-.footer-grid > *:nth-child(4) { animation-delay: 0.8s; }
-
-@media (min-width: 768px) {
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Company Info */
-.company-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.brand-name {
-  font-size: 1.5rem;
+/* Company section */
+.company-section .brand-name {
+  font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(
-    135deg,
-    var(--color-blue-400),
-    var(--color-purple-400)
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  margin-bottom: 1rem;
 }
 
 .company-description {
-  color: var(--color-slate-300);
-  margin-top: 1rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
 
 .contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  color: brown;
-  font-size: 0.875rem;
-  transition: color 0.2s ease;
-}
-
-.contact-item:hover {
-  color: red;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
 }
 
 .contact-icon {
-  width: 1rem;
-  height: 1rem;
-  color: var(--color-blue-400);
+  margin-right: 0.5rem;
 }
 
-/* Navigation */
-.nav-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.section-title {
-  font-size: 1.125rem;
+/* Quick Links & Services */
+.nav-section .section-title {
+  font-size: 1.4rem;
   font-weight: 600;
-  color: var(--color-white);
+  margin-bottom: 1rem;
 }
 
 .nav-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.8rem;
 }
 
 .nav-link {
-  color: var(--color-slate-300);
+  color: #fff;
   text-decoration: none;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
+  position: relative;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #ffd700;
+  transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-  color: var(--color-white);
-  transform: translateX(0.25rem);
+  color: #ffd700;
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 /* Newsletter */
-.newsletter-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.newsletter-section .section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 .newsletter-description {
-  color: var(--color-slate-300);
-  font-size: 0.875rem;
-  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .newsletter-form {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 .email-input {
-  flex: 1;
-  padding: 0.5rem 0.75rem;
-  background-color: var(--color-slate-800);
-  border: 1px solid var(--color-slate-700);
-  border-radius: 0.375rem;
-  color: var(--color-white);
-  font-size: 0.875rem;
-}
-
-.email-input::placeholder {
-  color: var(--color-slate-400);
-}
-
-.email-input:focus {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+  width: 70%;
   outline: none;
-  border-color: var(--color-blue-400);
-  box-shadow: 0 0 0 1px var(--color-blue-400);
 }
 
 .submit-button {
-  padding: 0.5rem;
-  background: linear-gradient(
-    135deg,
-    var(--color-blue-500),
-    var(--color-purple-500)
-  );
+  padding: 0.6rem 1rem;
+  background-color: #ffd700;
   border: none;
-  border-radius: 0.375rem;
-  color: var(--color-white);
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: background 0.3s ease;
 }
 
 .submit-button:hover {
-  background: linear-gradient(
-    135deg,
-    var(--color-blue-600),
-    var(--color-purple-600)
-  );
+  background-color: #e6c200;
 }
 
 .submit-icon {
-  width: 1rem;
-  height: 1rem;
+  color: #222;
+  width: 20px;
+  height: 20px;
 }
 
 /* Social Links */
 .social-links {
   display: flex;
   gap: 1rem;
-  padding-top: 0.5rem;
 }
 
 .social-link {
-  padding: 0.5rem;
-  background-color: var(--color-slate-800);
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
 }
 
 .social-link:hover {
-  background-color: var(--color-slate-700);
-  transform: scale(1.1);
+  color: #ffd700;
 }
 
 .social-icon {
-  width: 1rem;
-  height: 1rem;
-  color: var(--color-slate-400);
-  transition: color 0.2s ease;
-}
-
-.social-link:hover .social-icon {
-  color: var(--color-white);
+  width: 26px;
+  height: 26px;
 }
 
 /* Bottom Bar */
 .footer-separator {
-  height: 1px;
-  background-color: var(--color-slate-700);
   border: none;
-  margin-top: 2rem;
+  border-top: 1px solid #555;
+  margin: 2rem 0;
 }
 
 .bottom-bar {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.5rem 0;
-}
-
-.bottom-content {
+  text-align: center;
+  font-size: 0.9rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
-@media (min-width: 768px) {
-  .bottom-content {
-    flex-direction: row;
-    gap: 0;
-  }
+  gap: 0.8rem;
 }
 
 .legal-links {
   display: flex;
-  gap: 1.5rem;
-  font-size: 0.875rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
 }
 
 .legal-link {
-  color: var(--color-slate-400);
+  color: #ddd;
   text-decoration: none;
-  transition: color 0.2s ease;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.legal-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #ffd700;
+  transition: width 0.3s ease;
 }
 
 .legal-link:hover {
-  color: var(--color-white);
+  color: #ffd700;
 }
 
-.copyright {
-  color: var(--color-slate-400);
-  font-size: 0.875rem;
+.legal-link:hover::after {
+  width: 100%;
 }
 
-/* Responsive */
-@media (max-width: 767px) {
-  .footer-container {
-    padding: 3rem 1rem;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .newsletter-form {
+    flex-direction: column;
+    align-items: stretch;
   }
 
+  .email-input,
+  .submit-button {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .submit-button {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
   .footer-grid {
     gap: 2rem;
   }
 
-  .newsletter-form {
-    flex-direction: column;
-  }
-
-  .social-links {
-    justify-content: center;
+  .company-section .brand-name {
+    font-size: 1.6rem;
   }
 }

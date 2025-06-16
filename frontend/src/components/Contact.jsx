@@ -1,20 +1,33 @@
+/* eslint-disable prettier/prettier */
+import { Mail, Phone, MapPin } from 'lucide-react';
 import './Contact.css';
 
 function Contact() {
   return (
     <div className="contact-page">
-      <h2 style={{ textAlign: 'center' }}>📞 Contact Us</h2>
+      <h2 className="contact-heading">📞 Contact Us</h2>
       <div className="contact-info">
-        <p>
-          <strong>Email:</strong> contact@expertautomotive.com
-        </p>
-        <p>
-          <strong>Phone:</strong> 0877113822
-        </p>
-        <p>
-          <strong>Address:</strong> 59B Dorset Street Lower, Phibsborough,
-          Dublin 1, D01 C5R3
-        </p>
+        <div className="contact-card">
+          <Mail className="contact-icon" />
+          <div>
+            <p className="contact-label">Email</p>
+            <p className="contact-text">contact@expertautomotive.com</p>
+          </div>
+        </div>
+        <div className="contact-card">
+          <Phone className="contact-icon" />
+          <div>
+            <p className="contact-label">Phone</p>
+            <p className="contact-text">0877113822</p>
+          </div>
+        </div>
+        <div className="contact-card">
+          <MapPin className="contact-icon" />
+          <div>
+            <p className="contact-label">Address</p>
+            <p className="contact-text">59B Dorset Street Lower, Phibsborough, Dublin 1, D01 C5R3</p>
+          </div>
+        </div>
       </div>
 
       <div className="map-container">

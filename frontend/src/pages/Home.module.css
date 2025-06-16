@@ -1,141 +1,140 @@
+/* Home.module.css */
+
+/* Wrapper for background image and overlay */
 .backgroundWrapper {
   position: relative;
-  height: 100vh;
   width: 100%;
-  overflow: hidden;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
+/* Background image, full cover */
 .backgroundImage {
-  background-image: url('/background-image.avif'); /* replace with actual image path */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/background-image.avif');
   background-size: cover;
   background-position: center;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5); /* optional dark overlay */
+  filter: brightness(0.6);
   z-index: 1;
 }
 
+/* Dark overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+/* Content container */
 .content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  max-width: 900px;
+  padding: 0 20px;
   text-align: center;
-  padding: 2rem;
-  color: white;
-  max-width: 90%;
-
-  /* Animation */
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeSlideUp 1s ease-out forwards;
+  color: #fff;
 }
 
+/* Heading with fade in + color change animation */
 .heading {
   font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  background: linear-gradient(270deg, #ff416c, #ff4b2b, #1e90ff, #00bfff);
-  background-size: 800% 800%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientAnimation 10s ease infinite;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  animation: colorPulse 5s infinite alternate, fadeInUp 1.5s ease forwards;
 }
 
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+/* Paragraph with slight delay in animation */
 .paragraph {
-  font-size: 1.5rem;
-  font-weight: 500;
-  text-align: center;
-  margin-top: 1rem;
-  background: linear-gradient(270deg, #00c9ff, #92fe9d, #fcb045, #ff6a00);
-  background-size: 800% 800%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: paragraphAnimation 12s ease infinite;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1.5s ease 0.5s forwards;
+  opacity: 0;
 }
 
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes paragraphAnimation {
-  0% { background-position: 100% 50%; }
-  50% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
+/* Book Now button styling */
 .bookNowButton {
-  padding: 14px 28px;
-  font-size: 1rem;
-  background-color: #ff5722;
-  color: white;
+  background-color: #1976d2;
   border: none;
-  margin-top: 135px;
-  border-radius: 8px;
+  padding: 0.75rem 2rem;
+  font-size: 1.25rem;
+  color: white;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
+  opacity: 0;
+  animation: fadeInUp 1.5s ease 1s forwards;
 }
 
-.bookNowButton:hover {
-  background-color: #e64a19;
+.bookNowButton:hover,
+.bookNowButton:focus {
+  background-color: #0d47a1;
+  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.6);
 }
 
-/* Animation keyframes */
-@keyframes fadeSlideUp {
-  to {
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* ------------------------- */
-/* RESPONSIVE MEDIA QUERIES */
-/* ------------------------- */
-
-/* Phones */
-@media (max-width: 600px) {
-  .heading {
-    font-size: 2rem;
+@keyframes colorPulse {
+  0% {
+    color: #1976d2;
   }
-
-  .paragraph {
-    font-size: 1.1rem;
+  50% {
+    color: #ffcc00;
   }
-
-  .bookNowButton {
-    font-size: 1rem;
-    padding: 10px 20px;
+  100% {
+    color: #1976d2;
   }
 }
 
-/* Tablets */
-@media (max-width: 992px) {
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .heading {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 
   .paragraph {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .bookNowButton {
     font-size: 1rem;
-    padding: 12px 25px;
+    padding: 0.6rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1.75rem;
+  }
+
+  .paragraph {
+    font-size: 0.9rem;
+  }
+
+  .bookNowButton {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
   }
 }
