@@ -112,6 +112,9 @@ const MyBookings = () => {
 
   return (
     <div className="bookings-container">
+      <button className="btn btn-back" onClick={() => navigate('/dashboard')}>
+        Back to Dashboard
+      </button>
       <h2 className="heading">My Bookings</h2>
 
       {error && <p className="error-message">{error}</p>}
