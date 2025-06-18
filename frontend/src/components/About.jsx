@@ -10,7 +10,7 @@ function About() {
       <p className="about-intro">
         Welcome to our mechanic shop! With over <strong>20 years of experience</strong>, we provide top-notch car repair and maintenance services.
       </p>
-
+  
       <div className="about-content">
         <div className="about-mission animated-fade">
           <h2><FiTarget className="about-icon" /> Our Mission</h2>

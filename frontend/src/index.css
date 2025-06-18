@@ -5,10 +5,13 @@ Global Reset */
 *::before,
 *::after {
   box-sizing:border-box;
+  height: auto;
+  min-height: 100vh;
 }
 
 html,
 body {
+  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -54,7 +57,6 @@ body {
 .main-content {
   flex: 1;
   padding: 30px;
-  overflow-y: auto;
 }
 
 .dashboard-header {
