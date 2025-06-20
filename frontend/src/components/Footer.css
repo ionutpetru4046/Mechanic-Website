@@ -99,11 +99,34 @@
 }
 
 .newsletter-form {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  background: #f0f4f8;          /* light, soft background */
+  padding: 24px 30px;          /* nice spacing */
+  border-radius: 12px;         /* smooth rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* gentle shadow */
+  max-width: 320px;            /* limit width for neatness */
+  margin: 0 auto;              /* center horizontally */
+  font-family: 'Inter', sans-serif;
+  color: #334155;              /* dark slate color */
   font-weight: 500;
-  gap: 0.8rem;
+  line-height: 1.6;
+  font-size: 16px;
+  user-select: none;           /* optional: prevent accidental selection */
+}
+
+.newsletter-form p {
+  margin: 0;
+  white-space: pre-line;       /* honors line breaks in content */
+}
+
+/* Optional: highlight days, use monospace spacing for time */
+.newsletter-form p br {
+  content: "";
+  margin-bottom: 6px;
+  display: block;
+}
+
+.newsletter-form p strong {
+  color: #1e40af; /* deep blue for days or times you want to highlight */
 }
 
 .email-input {
