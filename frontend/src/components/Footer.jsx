@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import './Footer.css';
 import {
   Facebook,
@@ -94,21 +95,19 @@ export function Footer() {
 
           {/* Newsletter */}
           <div className="newsletter-section">
-            <h4 className="section-title">Stay Updated</h4>
-            <p className="newsletter-description">
-              Subscribe to our newsletter for the latest updates and insights.
-            </p>
+            <h4 className="section-title">Opening Hours</h4>
 
             <div>
               <div className="newsletter-form">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="email-input"
-                />
-                <button className="submit-button">
-                  <ArrowRight className="submit-icon" />
-                </button>
+                <p>
+                 Monday	8 a.m. - 5 p.m. <br />
+                 Tuesday	8 a.m. - 5 p.m. <br />
+                 Wednesday	8 a.m. - 5 p.m. <br />
+                 Thursday	8 a.m. - 5 p.m. <br />
+                 Friday	9 a.m. - 5 p.m. <br />
+                 Saturday	9 a.m. - 1 p.m. <br />
+                 Sunday	Closed
+                </p>
               </div>
 
               {/* Social Links */}

@@ -32,10 +32,9 @@ function NavBar() {
   // Helper to handle click on scroll links when NOT on homepage
   const handleNavClick = (section) => {
     if (location.pathname !== '/') {
-      // navigate to homepage first, then scroll after small delay
       navigate('/');
       setTimeout(() => {
-        scroll.scrollTo(document.getElementById(section).offsetTop - 70); // adjust offset if needed
+        scroll.scrollTo(document.getElementById(section)?.offsetTop - 70 || 0);
       }, 300);
     } else {
       setIsMenuOpen(false);
@@ -58,61 +57,11 @@ function NavBar() {
       <ul className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
         {location.pathname === '/' ? (
           <>
-            <li>
-              <Link
-                to=""
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="about"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="services"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="testimonials"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Testimonials
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="contact"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
-            </li>
+            <li><Link to="" smooth={true} duration={500} offset={-70} onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+            <li><Link to="about" smooth={true} duration={500} offset={-70} onClick={() => setIsMenuOpen(false)}>About</Link></li>
+            <li><Link to="services" smooth={true} duration={500} offset={-70} onClick={() => setIsMenuOpen(false)}>Services</Link></li>
+            <li><Link to="testimonials" smooth={true} duration={500} offset={-70} onClick={() => setIsMenuOpen(false)}>Testimonials</Link></li>
+            <li><Link to="contact" smooth={true} duration={500} offset={-70} onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
           </>
         ) : (
           <>
@@ -128,15 +77,9 @@ function NavBar() {
       {/* Right Side Auth Buttons */}
       <div className="navbar-actions">
         {user ? (
-          <>
-            <Link to="/dashboard" className="authButton" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
-            <Link to="/register" className="authButton" onClick={() => setIsMenuOpen(false)}>Register</Link>
-          </>
+          <Link to="/dashboard" className="authButton" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
         ) : (
-          <>
-            <Link to="/login" className="authButton" onClick={() => setIsMenuOpen(false)}>Login</Link>
-            <Link to="/register" className="authButton" onClick={() => setIsMenuOpen(false)}>Register</Link>
-          </>
+          <Link to="/auth" className="authButton" onClick={() => setIsMenuOpen(false)}>Login</Link>
         )}
       </div>
 

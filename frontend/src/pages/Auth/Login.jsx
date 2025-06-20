@@ -128,6 +128,7 @@ const styles = {
     color: '#333',
   },
   input: {
+    color: 'black',
     padding: '12px',
     borderRadius: '8px',
     border: '1px solid #ddd',

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
@@ -11,6 +12,7 @@ import Register from './pages/Auth/Register';
 import Dashboard from './pages/Dashboard';
 import BookNow from './pages/BookNow';
 import MyBookings from './pages/MyBookings';
+import AuthPage from './pages/Auth/AuthPage';
 import './index.css';
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
