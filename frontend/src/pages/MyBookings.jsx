@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import './MyBookings.css'; // import CSS file
+import './MyBookings.css';
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);

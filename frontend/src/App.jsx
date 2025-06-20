@@ -30,7 +30,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/book-now" element={<BookNow />} />
         <Route path="/my-bookings" element={<MyBookings />} />
-        {/* Add a 404 page if you want */}
       </Routes>
       <Footer />
     </>

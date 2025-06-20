@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import './Testimonials.css';
 import { Star } from 'lucide-react'; // using lucide-react icons for stars
+import './Testimonials.css';
 
 const testimonials = [
   {
