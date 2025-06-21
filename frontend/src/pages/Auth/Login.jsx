@@ -1,9 +1,10 @@
-// src/pages/Auth/Login.jsx
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 
 const Login = () => {
+  const { setUser } = useAuth(); // fixed typo here
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -19,7 +20,10 @@ const Login = () => {
         'http://localhost:5000/api/auth/login',
         form,
       );
+
       localStorage.setItem('token', res.data.token);
+      setUser({ token: res.data.token }); // update context immediately!
+
       console.log('login success, navigating to dashboard');
       navigate('/dashboard');
     } catch (err) {
@@ -73,7 +77,11 @@ const Login = () => {
           <button type="submit" style={styles.button}>
             Sign In
           </button>
-          <button style={styles.button} onClick={() => navigate('/')}>
+          <button
+            type="button"
+            style={styles.button}
+            onClick={() => navigate('/')}
+          >
             Go to Home Page
           </button>
         </form>
@@ -135,9 +143,6 @@ const styles = {
     fontSize: '14px',
     transition: 'border-color 0.2s',
     outline: 'none',
-    '&:focus': {
-      borderColor: '#007bff',
-    },
   },
   button: {
     backgroundColor: '#007bff',
@@ -150,9 +155,6 @@ const styles = {
     cursor: 'pointer',
     transition: 'background-color 0.2s',
     marginTop: '8px',
-    '&:hover': {
-      backgroundColor: '#0056b3',
-    },
   },
   error: {
     color: '#dc3545',
