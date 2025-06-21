@@ -1,12 +1,8 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable prettier/prettier */
+/* eslint-disable react/no-unescaped-entities *//* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
-import Login from '../Auth/Login';       // adjust paths as needed
+import Login from '../Auth/Login';
 import Register from '../Auth/Register';
-import './AuthPage.css';                              // optional CSS styling
+import './AuthPage.css';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -25,12 +21,28 @@ const AuthPage = () => {
           {isLogin ? (
             <p>
               Don't have an account?{" "}
-              <span onClick={() => setIsLogin(false)}>Register</span>
+              <span
+                role="button"
+                tabIndex={0}
+                onClick={() => setIsLogin(false)}
+                onKeyDown={(e) => { if (e.key === 'Enter') setIsLogin(false); }}
+                style={{ cursor: 'pointer', color: '#007bff', textDecoration: 'underline' }}
+              >
+                Register
+              </span>
             </p>
           ) : (
             <p>
               Already registered?{" "}
-              <span onClick={() => setIsLogin(true)}>Login</span>
+              <span
+                role="button"
+                tabIndex={0}
+                onClick={() => setIsLogin(true)}
+                onKeyDown={(e) => { if (e.key === 'Enter') setIsLogin(true); }}
+                style={{ cursor: 'pointer', color: '#007bff', textDecoration: 'underline' }}
+              >
+                Login
+              </span>
             </p>
           )}
         </div>
