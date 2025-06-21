@@ -11,9 +11,10 @@
 }
 
 .navbar-logo img {
-  height: 80px;
-  border-radius: 18%;
+  height: 114px;
+  border-radius: 6%;
   cursor: pointer;
+  width: 200px;
 }
 
 /* Navbar Links */
