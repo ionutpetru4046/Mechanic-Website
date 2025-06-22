@@ -78,13 +78,6 @@ const Register = () => {
             />
           </div>
           <button type="submit" style={styles.button}>Create Account</button>
-          <button
-            type="button"
-            style={{ ...styles.button, backgroundColor: '#6c757d', marginTop: '8px' }}
-            onClick={() => navigate('/')}
-          >
-            Go to Home Page
-          </button>
         </form>
       </div>
     </div>

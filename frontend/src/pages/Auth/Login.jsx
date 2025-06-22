@@ -77,13 +77,6 @@ const Login = () => {
           <button type="submit" style={styles.button}>
             Sign In
           </button>
-          <button
-            type="button"
-            style={styles.button}
-            onClick={() => navigate('/')}
-          >
-            Go to Home Page
-          </button>
         </form>
       </div>
     </div>
