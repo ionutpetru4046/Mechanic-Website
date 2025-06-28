@@ -104,7 +104,7 @@
   border-radius: 12px;         /* smooth rounded corners */
   box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* gentle shadow */
   max-width: 320px;            /* limit width for neatness */
-  margin: 0 auto;              /* center horizontally */
+  margin-bottom: 30px;              /* center horizontally */
   font-family: 'Inter', sans-serif;
   color: #334155;              /* dark slate color */
   font-weight: 500;
