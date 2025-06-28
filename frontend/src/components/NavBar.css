@@ -124,10 +124,6 @@
     display: flex;
   }
 
-  .navbar-actions {
-    margin-top: 1rem;
-  }
-
   .authButton {
     font-size: 14px;
     padding: 6px 10px;
