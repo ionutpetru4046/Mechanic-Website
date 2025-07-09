@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  A modern, responsive mechanic website built with React.js to showcase services, allow bookings, display testimonials, and support user authentication.
+  A clean, modern, and fully responsive website built for a real mechanic business in Dublin. Built with React.js, this project showcases services, displays customer reviews, allows user authentication, and includes a booking system and admin dashboard (WIP).
 </p>
 
 <div align="center">
@@ -14,7 +14,7 @@
 
 ## 🌐 Live Demo
 
-👉 [View Website](https://yourusername.github.io/mechanic-website)  
+👉 [View Website](mechanic-website-tau.vercel.app)  
 *(Replace with your GitHub Pages live URL)*
 
 ---
