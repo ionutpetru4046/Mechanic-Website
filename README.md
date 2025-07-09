@@ -41,7 +41,7 @@
 - 🎨 Custom CSS
 - 📄 React Scroll
 
-**Backend (planned/coming soon):**
+**Backend**
 - 🖥️ Node.js + Express
 - 🗃️ MongoDB + Mongoose
 - 🔐 JWT Auth for login system
