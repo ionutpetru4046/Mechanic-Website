@@ -14,8 +14,7 @@
 
 ## 🌐 Live Demo
 
-👉 [View Website](mechanic-website-tau.vercel.app)  
-*(Replace with your GitHub Pages live URL)*
+👉 [View Website](https://mechanic-website-tau.vercel.app)
 
 ---
 
