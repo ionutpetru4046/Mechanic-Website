@@ -47,6 +47,7 @@ const Register = () => {
               placeholder="Enter your full name"
               value={form.name}
               onChange={handleChange}
+              autoComplete='name'
               required
               style={styles.input}
             />
@@ -60,6 +61,7 @@ const Register = () => {
               placeholder="Enter your email"
               value={form.email}
               onChange={handleChange}
+              autoComplete='email'
               required
               style={styles.input}
             />
@@ -73,6 +75,7 @@ const Register = () => {
               placeholder="Create a password"
               value={form.password}
               onChange={handleChange}
+              autoComplete='new-password'
               required
               style={styles.input}
             />
