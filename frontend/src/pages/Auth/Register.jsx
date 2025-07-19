@@ -17,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await API.post('/auth/register', form);
+      const res = await API.post('api/auth/register', form);
       // Assume res.data contains user and token
       const { user, token } = res.data;
       if (user && token) {
