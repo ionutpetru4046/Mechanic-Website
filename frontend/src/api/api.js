@@ -1,12 +1,7 @@
 import axios from 'axios';
 
-const baseURL =
-  import.meta.env.VITE_ENV === 'production'
-    ? import.meta.env.VITE_PROD_BASE_URL
-    : import.meta.env.VITE_DEV_BASE_URL;
-
 const API = axios.create({
-  baseURL,
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 // Add JWT token to request automatically if exists

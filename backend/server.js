@@ -10,21 +10,26 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const prodOrigins = [process.env.ORIGIN_1, process.env.ORIGIN_2];
-const devOrigin = ['http://localhost:5173'];
+// Allowed origins for production and development
+const prodOrigins = [
+  'https://mechanic-website-52spzelxv-ionutpetru4046s-projects.vercel.app',
+  'https://mechanic-website-modern.onrender.com',
+];
+const devOrigins = ['http://localhost:5173', 'http://localhost:3000'];
+
 const allowedOrigins =
-  process.env.NODE_ENV === 'production' ? prodOrigins : devOrigin;
+  process.env.NODE_ENV === 'production' ? prodOrigins : devOrigins;
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin)) {
-        console.log(origin, allowedOrigins);
+      // Allow requests with no origin like Postman or curl
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by cors'));
+        callback(new Error('Not allowed by CORS'));
       }
     },
-
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
