@@ -3,6 +3,7 @@ import axios from 'axios';
 const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 const API = axios.create({
   baseURL: `${baseURL}/api`,
+  withCredentials: true, // this is request for cors and cookies
 });
 
 // Add JWT token to request automatically if exists
