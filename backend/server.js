@@ -5,33 +5,30 @@ import userRoutes from './routes/users.js';
 import bookingRouter from './routes/bookings.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const app = express();
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Allowed origins for production and development
-const prodOrigins = [
-  'https://mechanic-website-52spzelxv-ionutpetru4046s-projects.vercel.app',
-  'https://mechanic-website-modern.onrender.com',
-];
-const devOrigins = ['http://localhost:5173', 'http://localhost:3000'];
-
-const allowedOrigins =
-  process.env.NODE_ENV === 'production' ? prodOrigins : devOrigins;
-
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin like Postman or curl
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
+      const allowedOrigins = [
+        'http://localhost:5173',
+        'https://mechanic-website-tau.vercel.app/',
+      ];
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true); // allow all the requests
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new Error('not allowed by CORS')); // reject the request
       }
     },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true, // Allow cookies to be sent
   }),
 );
 
