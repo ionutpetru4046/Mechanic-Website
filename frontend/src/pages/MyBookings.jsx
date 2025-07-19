@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom'; // fixed import here
 import './MyBookings.css';
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [editingBooking, setEditingBooking] = useState(null);
   const [formData, setFormData] = useState({
     service: '',
@@ -13,8 +14,9 @@ const MyBookings = () => {
     time: '',
     notes: '',
   });
-  const navigate = useNavigate();
+  const [actionLoading, setActionLoading] = useState(false); // for delete/update button loading
 
+  const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -24,6 +26,7 @@ const MyBookings = () => {
     }
 
     const fetchBookings = async () => {
+      setLoading(true);
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/bookings`,
@@ -45,6 +48,8 @@ const MyBookings = () => {
         } else {
           setError('Failed to load bookings. Please try again.');
         }
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -55,14 +60,21 @@ const MyBookings = () => {
     if (!window.confirm('Are you sure you want to cancel this booking?'))
       return;
 
+    setActionLoading(true);
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/bookings/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setBookings(bookings.filter((b) => b._id !== id));
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+      setBookings((prev) => prev.filter((b) => b._id !== id));
+      setError('');
     } catch (err) {
       console.error('Error deleting booking:', err);
       setError('Failed to cancel booking. Please try again.');
+    } finally {
+      setActionLoading(false);
     }
   };
 
@@ -74,6 +86,7 @@ const MyBookings = () => {
       time: booking.time || '',
       notes: booking.notes || '',
     });
+    setError('');
   };
 
   const cancelEdit = () => {
@@ -91,9 +104,10 @@ const MyBookings = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    setActionLoading(true);
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/bookings/${editingBooking._id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${editingBooking._id}`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -107,19 +121,28 @@ const MyBookings = () => {
     } catch (err) {
       console.error('Error updating booking:', err);
       setError('Failed to update booking. Please try again.');
+    } finally {
+      setActionLoading(false);
     }
   };
 
   return (
     <div className="bookings-container">
-      <button className="btn btn-back" onClick={() => navigate('/dashboard')}>
+      <button
+        className="btn btn-back"
+        onClick={() => navigate('/dashboard')}
+        disabled={loading || actionLoading}
+      >
         Back to Dashboard
       </button>
+
       <h2 className="heading">My Bookings</h2>
 
-      {error && <p className="error-message">{error}</p>}
-
-      {editingBooking ? (
+      {loading ? (
+        <p>Loading bookings...</p>
+      ) : error ? (
+        <p className="error-message">{error}</p>
+      ) : editingBooking ? (
         <form onSubmit={handleUpdate} className="edit-form">
           <h3>Edit Booking</h3>
           <label className="form-label">
@@ -131,6 +154,7 @@ const MyBookings = () => {
               onChange={handleChange}
               required
               className="form-input"
+              disabled={actionLoading}
             />
           </label>
           <label className="form-label">
@@ -142,6 +166,7 @@ const MyBookings = () => {
               onChange={handleChange}
               required
               className="form-input"
+              disabled={actionLoading}
             />
           </label>
           <label className="form-label">
@@ -152,6 +177,7 @@ const MyBookings = () => {
               value={formData.time}
               onChange={handleChange}
               className="form-input"
+              disabled={actionLoading}
             />
           </label>
           <label className="form-label">
@@ -161,16 +187,22 @@ const MyBookings = () => {
               value={formData.notes}
               onChange={handleChange}
               className="form-textarea"
+              disabled={actionLoading}
             />
           </label>
           <div className="form-buttons">
-            <button type="submit" className="btn btn-primary">
-              Save
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={actionLoading}
+            >
+              {actionLoading ? 'Saving...' : 'Save'}
             </button>
             <button
               type="button"
               onClick={cancelEdit}
               className="btn btn-secondary"
+              disabled={actionLoading}
             >
               Cancel
             </button>
@@ -203,12 +235,14 @@ const MyBookings = () => {
                 <button
                   className="btn btn-edit"
                   onClick={() => handleEdit(booking)}
+                  disabled={actionLoading}
                 >
                   Edit
                 </button>
                 <button
                   className="btn btn-delete"
                   onClick={() => handleDelete(booking._id)}
+                  disabled={actionLoading}
                 >
                   Cancel
                 </button>
