@@ -22,6 +22,7 @@ app.use(
       const allowedOrigins = [
         'http://localhost:5173',
         'https://mechanic-website-tau.vercel.app',
+        'https://mechanic-website-1pg8qmx0s-ionutpetru4046s-projects.vercel.app',
       ];
       if (
         !origin ||
