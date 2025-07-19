@@ -10,22 +10,23 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = [
-  'https://mechanic-website-tau.vercel.app',
-  'http://localhost:3000',
-];
-
+const prodOrigins = [process.env.ORIGIN_1, process.env.ORIGIN_2];
+const devOrigin = ['http://localhost:5173'];
+const allowedOrigins =
+  process.env.NODE_ENV === 'production' ? prodOrigins : devOrigin;
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = `CORS policy: Access denied from origin ${origin}`;
-        return callback(new Error(msg), false);
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin)) {
+        console.log(origin, allowedOrigins);
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by cors'));
       }
-      return callback(null, true);
     },
+
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }),
 );
 
