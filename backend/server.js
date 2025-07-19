@@ -20,9 +20,10 @@ app.use(
     origin: (origin, callback) => {
       console.log('CORS Origin:', origin);
       const allowedOrigins = [
-        'http://localhost:5173',
-        'https://mechanic-website-tau.vercel.app',
-        'https://mechanic-website-1pg8qmx0s-ionutpetru4046s-projects.vercel.app',
+        'http://localhost:5173', // dev frontend
+        'https://mechanic-website-tau.vercel.app', // other deployed frontend if needed
+        'https://mechanic-website-1pg8qmx0s-ionutpetru4046s-projects.vercel.app', // other vercel frontend if needed
+        'https://mechanic-website.onrender.com', // your backend URL, **not needed** here for CORS but sometimes useful if frontend & backend on same domain,
       ];
       if (
         !origin ||
