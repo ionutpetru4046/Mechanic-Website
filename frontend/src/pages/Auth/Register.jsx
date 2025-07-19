@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/authContext'; // import useAuth
 
@@ -17,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', form);
+      const res = await API.post('/auth/register', form);
       // Assume res.data contains user and token
       const { user, token } = res.data;
       if (user && token) {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
 
@@ -16,10 +16,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        'http://localhost:5000/api/auth/login',
-        form,
-      );
+      const res = await API.post('/auth/login', form);
 
       localStorage.setItem('token', res.data.token);
       setUser({ token: res.data.token }); // update context immediately!

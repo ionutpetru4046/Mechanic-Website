@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api/api';
 import styles from './Dashboard.module.css';
 import { useAuth } from '../context/authContext';
 
@@ -21,14 +21,14 @@ function Dashboard() {
 
     const fetchData = async () => {
       try {
-        const VITE_API_URL = import.meta.env.VITE_API_URL;
+        const token = localStorage.getItem('token');
 
-        const userRes = await axios.get(`${VITE_API_URL}/api/users/profile`, {
+        const userRes = await API.get('/users/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(userRes.data);
 
-        const bookingsRes = await axios.get(`${VITE_API_URL}/api/bookings`, {
+        const bookingsRes = await API.get('/bookings', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBookings(bookingsRes.data.bookings || []);
