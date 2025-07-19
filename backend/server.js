@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: (origin, callback) => {
+      console.log('CORS Origin:', origin);
       const allowedOrigins = [
         'http://localhost:5173', // dev frontend origin
         'https://mechanic-website-tau.vercel.app', // production frontend origin (no trailing slash)
