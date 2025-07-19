@@ -6,7 +6,10 @@ const API = axios.create({
 
 // Add JWT token to request automatically if exists
 API.interceptors.request.use((req) => {
-  if (req.url.endsWith('/auth/login') || req.url.endsWith('/auth/register')) {
+  if (
+    req.url &&
+    (req.url.includes('/auth/login') || req.url.includes('/auth/register'))
+  ) {
     return req;
   }
 

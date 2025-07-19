@@ -19,16 +19,16 @@ app.use(
   cors({
     origin: (origin, callback) => {
       const allowedOrigins = [
-        'http://localhost:5173',
-        'https://mechanic-website-tau.vercel.app/',
+        'http://localhost:5173', // dev frontend origin
+        'https://mechanic-website-tau.vercel.app', // production frontend origin (no trailing slash)
       ];
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true); // allow all the requests
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true); // allow request
       } else {
-        callback(new Error('not allowed by CORS')); // reject the request
+        callback(new Error('Not allowed by CORS'));
       }
     },
-    credentials: true, // Allow cookies to be sent
+    credentials: true, // allow cookies, authorization headers
   }),
 );
 
