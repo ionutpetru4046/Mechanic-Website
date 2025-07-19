@@ -20,16 +20,20 @@ app.use(
     origin: (origin, callback) => {
       console.log('CORS Origin:', origin);
       const allowedOrigins = [
-        'http://localhost:5173', // dev frontend origin
-        'https://mechanic-website-tau.vercel.app', // production frontend origin (no trailing slash)
+        'http://localhost:5173',
+        'https://mechanic-website-tau.vercel.app',
       ];
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true); // allow request
+      if (
+        !origin ||
+        origin === 'null' ||
+        allowedOrigins.indexOf(origin) !== -1
+      ) {
+        callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
       }
     },
-    credentials: true, // allow cookies, authorization headers
+    credentials: true,
   }),
 );
 
