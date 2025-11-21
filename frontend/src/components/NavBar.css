@@ -1,3 +1,4 @@
+/* Base navbar styling */
 .navbar {
   display: flex;
   align-items: center;
@@ -7,14 +8,16 @@
   top: 0;
   background-color: white;
   z-index: 999;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Logo - responsive sizing */
 .navbar-logo img {
-  height: 114px;
+  height: clamp(70px, 10vw, 114px);
+  width: clamp(140px, 20vw, 200px);
   border-radius: 6%;
   cursor: pointer;
-  width: 200px;
+  object-fit: contain;
 }
 
 /* Navbar Links */
@@ -24,15 +27,17 @@
   gap: 2rem;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .navbar-links a {
   font-weight: bold;
   text-decoration: none;
   color: #333;
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
   position: relative;
   transition: color 0.3s;
+  white-space: nowrap;
 }
 
 /* Underline Hover Effect */
@@ -51,20 +56,21 @@
   width: 100%;
 }
 
-/* Auth buttons */
+/* Auth buttons - responsive */
 .authButton {
-  padding: 0.5rem 1.5rem;
+  padding: clamp(0.5rem, 2vw, 0.6rem) clamp(1rem, 3vw, 1.5rem);
   margin: 0 4px;
   background: #6b1717;
   color: #fff;
   border-radius: 6px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(14px, 2vw, 16px);
   text-decoration: none;
   border: none;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
   transition: 0.3s;
+  white-space: nowrap;
 }
 
 .authButton:hover {
@@ -76,6 +82,7 @@
 .navbar-actions {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 /* Hamburger Menu */
@@ -86,7 +93,8 @@
   background: none;
   border: none;
   cursor: pointer;
-  margin-left: 1rem;
+  padding: 0.5rem;
+  z-index: 1001;
 }
 
 .bar {
@@ -97,41 +105,17 @@
   border-radius: 2px;
 }
 
-/* Responsive: Mobile Devices */
-@media (max-width: 900px) {
-  .navbar {
-    flex-wrap: wrap;
-    padding: 1rem;
-  }
+/* Hamburger animation when active */
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
 
-  .navbar-links {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-    padding: 2rem 0;
-    display: none;
-    background: #fff;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
 
-  .navbar-links.active {
-    display: flex;
-  }
-
-  .authButton {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .hamburger {
-    display: flex;
-  }
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Dark Mode Compatibility */
@@ -161,4 +145,260 @@
 
 .navbar.dark .bar {
   background-color: #fff;
+}
+
+.navbar.dark .navbar-links {
+  background: #222;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+/* Large tablets and small laptops (1024px and below) */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+  
+  .navbar-links {
+    gap: 1.5rem;
+  }
+  
+  .navbar-links a {
+    font-size: 18px;
+  }
+}
+
+/* Tablets (768px - 900px) */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 1rem;
+    flex-wrap: nowrap;
+  }
+
+  .navbar-logo img {
+    height: 80px;
+    width: 160px;
+  }
+
+  .navbar-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    display: none;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-links a {
+    font-size: 24px;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-actions {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+    gap: 1rem;
+  }
+
+  .navbar-links.active ~ .navbar-actions {
+    display: flex;
+  }
+
+  .authButton {
+    font-size: 16px;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+}
+
+/* Mobile devices (600px and below) */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0.875rem 1rem;
+  }
+
+  .navbar-logo img {
+    height: 60px;
+    width: 130px;
+  }
+
+  .navbar-links {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .navbar-links a {
+    font-size: 20px;
+  }
+
+  .navbar-actions {
+    flex-direction: column;
+    width: 90%;
+    max-width: 300px;
+    gap: 0.75rem;
+  }
+
+  .authButton {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding: 0.75rem 1rem;
+    margin: 0;
+  }
+
+  .hamburger {
+    padding: 0.5rem;
+  }
+
+  .bar {
+    width: 22px;
+  }
+}
+
+/* Small mobile devices (480px and below) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem 0.875rem;
+  }
+
+  .navbar-logo img {
+    height: 50px;
+    width: 110px;
+  }
+
+  .navbar-links a {
+    font-size: 18px;
+  }
+
+  .authButton {
+    font-size: 14px;
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* Extra small devices (375px and below) */
+@media (max-width: 375px) {
+  .navbar {
+    padding: 0.625rem 0.75rem;
+  }
+
+  .navbar-logo img {
+    height: 45px;
+    width: 100px;
+  }
+
+  .navbar-links {
+    gap: 1.25rem;
+  }
+
+  .navbar-links a {
+    font-size: 16px;
+  }
+
+  .authButton {
+    font-size: 13px;
+    padding: 0.65rem 0.875rem;
+  }
+
+  .hamburger {
+    padding: 0.375rem;
+  }
+
+  .bar {
+    width: 20px;
+    height: 2.5px;
+  }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-height: 600px) and (orientation: landscape) {
+  .navbar-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .navbar-links a {
+    font-size: 16px;
+    padding: 0.5rem;
+  }
+
+  .navbar-actions {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    flex-direction: row;
+  }
+
+  .authButton {
+    width: auto;
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Prevent body scroll when mobile menu is open */
+body:has(.navbar-links.active) {
+  overflow: hidden;
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hamburger,
+  .authButton,
+  .navbar-links a {
+    min-height: 44px; /* iOS recommended touch target size */
+  }
+
+  .navbar-links a {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .navbar-logo img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Accessibility - Focus states */
+.navbar-links a:focus,
+.authButton:focus,
+.hamburger:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
