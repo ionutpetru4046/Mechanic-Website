@@ -3,6 +3,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import API from '../api/api';
 import styles from './Dashboard.module.css';
 import { useAuth } from '../context/authContext';
+import {
+  Calendar,
+  Clock,
+  User,
+  Settings,
+  LogOut,
+  Plus,
+  BookOpen,
+  TrendingUp,
+  CheckCircle,
+  AlertCircle,
+  CalendarDays,
+  Wrench,
+  Car,
+  Star,
+  DollarSign,
+  BarChart3,
+  Phone,
+  Mail,
+  MapPin
+} from 'lucide-react';
 
 function Dashboard() {
   const { logout } = useAuth();
@@ -68,65 +89,224 @@ function Dashboard() {
   }
 
   return (
-    <div className={styles['dashboard-container']}>
+    <div className={styles.dashboard}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
-        <h2>Dashboard</h2>
-        <ul>
-          <li>
-            <Link to="/book-now">Book Now</Link>
-          </li>
-          <li>
-            <Link to="/my-bookings">My Bookings</Link>
-          </li>
-          <li>
-            <button onClick={handleLogout} className={styles.logoutButton}>
-              <span className={styles.logoutIcon}>↪</span> Log Out
-            </button>
-          </li>
-        </ul>
+        <div className={styles.sidebarHeader}>
+          <div className={styles.logo}>
+            <Wrench size={28} />
+            <span>Expert Auto</span>
+          </div>
+          <div className={styles.userInfo}>
+            <div className={styles.userAvatar}>
+              <User size={20} />
+            </div>
+            <div className={styles.userDetails}>
+              <span className={styles.userName}>{user?.name}</span>
+              <span className={styles.userRole}>Customer</span>
+            </div>
+          </div>
+        </div>
+
+        <nav className={styles.sidebarNav}>
+          <Link to="/dashboard" className={`${styles.navLink} ${styles.active}`}>
+            <BarChart3 size={18} />
+            <span>Dashboard</span>
+          </Link>
+          <Link to="/book-now" className={styles.navLink}>
+            <Plus size={18} />
+            <span>Book Service</span>
+          </Link>
+          <Link to="/my-bookings" className={styles.navLink}>
+            <BookOpen size={18} />
+            <span>My Bookings</span>
+          </Link>
+          <Link to="/dashboard" className={styles.navLink}>
+            <TrendingUp size={18} />
+            <span>Analytics</span>
+          </Link>
+          <Link to="/dashboard" className={styles.navLink}>
+            <Settings size={18} />
+            <span>Settings</span>
+          </Link>
+        </nav>
+
+        <div className={styles.sidebarFooter}>
+          <button onClick={handleLogout} className={styles.logoutButton}>
+            <LogOut size={18} />
+            <span>Sign Out</span>
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}
-      <main className={styles['main-content']}>
-        <header className={styles['dashboard-header']}>
-          <h1>Welcome back, {user?.name}!</h1>
-          <p>You are successfully logged in.</p>
+      <main className={styles.main}>
+        {/* Header */}
+        <header className={styles.header}>
+          <div className={styles.headerContent}>
+            <div>
+              <h1 className={styles.title}>Good morning, {user?.name}! 👋</h1>
+              <p className={styles.subtitle}>Here's your automotive service overview</p>
+            </div>
+            <div className={styles.headerActions}>
+              <Link to="/book-now" className={styles.primaryButton}>
+                <Plus size={16} />
+                Schedule Service
+              </Link>
+            </div>
+          </div>
         </header>
 
-        {/* Cards or Info */}
-        <section className={styles['dashboard-cards']}>
-          <div className={styles.card}>
-            <h3>Total Bookings</h3>
-            <p>{bookings.length}</p>
+        {/* Quick Stats */}
+        <section className={styles.stats}>
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <CalendarDays size={24} />
+            </div>
+            <div className={styles.statContent}>
+              <h3 className={styles.statNumber}>{bookings.length}</h3>
+              <p className={styles.statLabel}>Total Bookings</p>
+            </div>
           </div>
-          <div className={styles.card}>
-            <h3>Account</h3>
-            <p>{user?.email}</p>
+
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <Clock size={24} />
+            </div>
+            <div className={styles.statContent}>
+              <h3 className={styles.statNumber}>
+                {bookings.filter(b => new Date(b.date) > new Date()).length}
+              </h3>
+              <p className={styles.statLabel}>Upcoming</p>
+            </div>
+          </div>
+
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <CheckCircle size={24} />
+            </div>
+            <div className={styles.statContent}>
+              <h3 className={styles.statNumber}>
+                {bookings.filter(b => b.status === 'completed').length}
+              </h3>
+              <p className={styles.statLabel}>Completed</p>
+            </div>
+          </div>
+
+          <div className={styles.statCard}>
+            <div className={styles.statIcon}>
+              <Star size={24} />
+            </div>
+            <div className={styles.statContent}>
+              <h3 className={styles.statNumber}>4.9</h3>
+              <p className={styles.statLabel}>Rating</p>
+            </div>
           </div>
         </section>
 
-        {/* Bookings List */}
-        <section className={styles.bookingsSection}>
-          <h2>Your Bookings</h2>
-          <ul className={styles.bookingList}>
-            {bookings.length === 0 ? (
-              <li>No bookings found.</li>
-            ) : (
-              bookings.map((booking) => (
-                <li
-                  className={styles.bookingCard}
-                  key={booking._id || booking.id}
-                >
-                  <strong>{booking.service}</strong> on {booking.date} at{' '}
-                  {booking.time}
-                  <br />
-                  Notes: {booking.notes || 'None'}
-                </li>
-              ))
-            )}
-          </ul>
-        </section>
+        {/* Recent Activity & Quick Actions */}
+        <div className={styles.contentGrid}>
+          {/* Recent Bookings */}
+          <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Recent Bookings</h2>
+              <Link to="/my-bookings" className={styles.viewAll}>
+                View All
+              </Link>
+            </div>
+
+            <div className={styles.bookingList}>
+              {bookings.length === 0 ? (
+                <div className={styles.emptyState}>
+                  <Calendar size={48} />
+                  <h3>No bookings yet</h3>
+                  <p>Schedule your first service appointment</p>
+                  <Link to="/book-now" className={styles.primaryButton}>
+                    <Plus size={16} />
+                    Book Now
+                  </Link>
+                </div>
+              ) : (
+                bookings.slice(0, 3).map((booking) => (
+                  <div className={styles.bookingCard} key={booking._id || booking.id}>
+                    <div className={styles.bookingHeader}>
+                      <div className={styles.serviceInfo}>
+                        <h4 className={styles.serviceName}>{booking.service}</h4>
+                        <div className={styles.bookingMeta}>
+                          <span className={styles.bookingDate}>
+                            {new Date(booking.date).toLocaleDateString('en-US', {
+                              weekday: 'short',
+                              month: 'short',
+                              day: 'numeric'
+                            })}
+                          </span>
+                          <span className={styles.bookingTime}>{booking.time}</span>
+                        </div>
+                      </div>
+                      <div className={styles.bookingStatus}>
+                        <AlertCircle size={14} />
+                        <span>Scheduled</span>
+                      </div>
+                    </div>
+
+                    {booking.notes && (
+                      <div className={styles.bookingNotes}>
+                        <span className={styles.notesLabel}>Notes:</span>
+                        <span className={styles.notesText}>{booking.notes}</span>
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </section>
+
+          {/* Quick Actions */}
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Quick Actions</h2>
+
+            <div className={styles.quickActions}>
+              <Link to="/book-now" className={styles.actionCard}>
+                <div className={styles.actionIcon}>
+                  <Wrench size={24} />
+                </div>
+                <div className={styles.actionContent}>
+                  <h4>Schedule Service</h4>
+                  <p>Book a new appointment</p>
+                </div>
+                <div className={styles.actionArrow}>
+                  <Plus size={16} />
+                </div>
+              </Link>
+
+              <Link to="/my-bookings" className={styles.actionCard}>
+                <div className={styles.actionIcon}>
+                  <BookOpen size={24} />
+                </div>
+                <div className={styles.actionContent}>
+                  <h4>View Bookings</h4>
+                  <p>Manage your appointments</p>
+                </div>
+                <div className={styles.actionArrow}>
+                  <Calendar size={16} />
+                </div>
+              </Link>
+
+              <div className={styles.actionCard}>
+                <div className={styles.actionIcon}>
+                  <Phone size={24} />
+                </div>
+                <div className={styles.actionContent}>
+                  <h4>Contact Us</h4>
+                  <p>Need help? Call us</p>
+                </div>
+                <div className={styles.actionArrow}>
+                  <Phone size={16} />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   );
