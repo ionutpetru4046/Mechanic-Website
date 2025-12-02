@@ -31,6 +31,9 @@ const Login = () => {
   return (
     <div style={styles.container}>
       <div style={styles.formContainer}>
+        <button onClick={() => navigate('/')} style={styles.backButton}>
+          ⬅ Back to Homepage
+        </button>
         <h2 style={styles.title}>Welcome Back</h2>
         <p style={styles.subtitle}>Please enter your details to sign in</p>
 
@@ -148,6 +151,17 @@ const styles = {
     fontSize: '14px',
     textAlign: 'center',
     marginBottom: '16px',
+  },
+  backButton: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: '#007bff',
+    fontSize: '14px',
+    cursor: 'pointer',
+    marginBottom: '16px',
+    textDecoration: 'underline',
+    padding: '0',
+    textAlign: 'center',
   },
 };
 

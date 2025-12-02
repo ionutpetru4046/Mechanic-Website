@@ -51,22 +51,21 @@ export function Footer() {
           <div className="nav-section">
             <h4 className="section-title">Quick Links</h4>
             <nav className="nav-list">
-              {[
-                'Home',
-                'About Us',
-                'Services',
-                'Careers',
-                'Testimonials',
-                'Contact',
-              ].map((link) => (
-                <a
-                  key={link}
-                  href={`/${link.toLowerCase().replace(' ', '-')}`}
-                  className="nav-link"
-                >
-                  {link}
-                </a>
-              ))}
+              <a href="/" className="nav-link">
+                Home
+              </a>
+              <a href="/about" className="nav-link">
+                About Us
+              </a>
+              <a href="/services" className="nav-link">
+                Services
+              </a>
+              <a href="/testimonials" className="nav-link">
+                Testimonials
+              </a>
+              <a href="/contact" className="nav-link">
+                Contact
+              </a>
             </nav>
           </div>
 
@@ -100,13 +99,13 @@ export function Footer() {
             <div>
               <div className="newsletter-form">
                 <p>
-                 Monday	8 a.m. - 5 p.m. <br />
-                 Tuesday	8 a.m. - 5 p.m. <br />
-                 Wednesday	8 a.m. - 5 p.m. <br />
-                 Thursday	8 a.m. - 5 p.m. <br />
-                 Friday	9 a.m. - 5 p.m. <br />
-                 Saturday	9 a.m. - 1 p.m. <br />
-                 Sunday	Closed
+                  Monday 8 a.m. - 5 p.m. <br />
+                  Tuesday 8 a.m. - 5 p.m. <br />
+                  Wednesday 8 a.m. - 5 p.m. <br />
+                  Thursday 8 a.m. - 5 p.m. <br />
+                  Friday 9 a.m. - 5 p.m. <br />
+                  Saturday 9 a.m. - 1 p.m. <br />
+                  Sunday Closed
                 </p>
               </div>
 
