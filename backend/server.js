@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
 
 // Parse incoming data
 app.use(express.json());
@@ -41,16 +41,25 @@ app.get('/', (req, res) => {
   res.send('API is running 🟢');
 });
 
-// ✅ Connect to DB and start server
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
+// Connect to DB, then start server
+const startServer = async () => {
+  if (!MONGO_URI) {
+    console.error(
+      '❌ MONGO_URI (or MONGODB_URI) is not set. Add it in .env locally or in Render environment variables.',
+    );
+    process.exit(1);
+  }
+
+  try {
+    await mongoose.connect(MONGO_URI);
     console.log('✅ Connected to MongoDB');
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
+      console.log(`🚀 Server running on port ${PORT}`);
     });
-  })
-  .catch((err) => {
-    console.log('Connecting to MongoDB:', process.env.MONGO_URI);
+  } catch (err) {
     console.error('❌ MongoDB connection failed:', err.message);
-  });
+    process.exit(1);
+  }
+};
+
+startServer();
