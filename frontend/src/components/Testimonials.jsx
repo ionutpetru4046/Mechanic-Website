@@ -1,87 +1,94 @@
-/* eslint-disable prettier/prettier */
-import { Star } from 'lucide-react'; // using lucide-react icons for stars
+import { Star } from 'lucide-react';
 import './Testimonials.css';
 
 const testimonials = [
   {
-    name: 'Hellen Horan.',
+    name: 'Hellen Horan',
     review:
-      'The staff in Expert Automotive are always helpful, reliable and straightforward to deal with. Their repairs are reasonably priced and completed on the agreed date.',
+      'Always helpful, reliable and straightforward. Repairs are fairly priced and done on the agreed date.',
     rating: 5,
     photo: '/images/helen.png',
   },
   {
-    name: 'William Landale.',
+    name: 'William Landale',
     review:
-      'New battery fitted, seemed very nice and professional. Very happy with this experience. Thanks!',
+      'New battery fitted — very professional. Very happy with the experience.',
     rating: 5,
     photo: '/images/william.png',
   },
   {
-    name: 'Gal Hanukaev.',
-    review:
-      'The guys at Expert Automotive consistently over deliver with their service. Absolutely brilliant!',
+    name: 'Gal Hanukaev',
+    review: 'They consistently over-deliver. Absolutely brilliant service.',
     rating: 5,
     photo: '/images/Gal.png',
   },
   {
-    name: 'Stefan Giurgila.',
+    name: 'Stefan Giurgila',
     review:
-      'Got my own parts(Clutch kit) and just needed to get it fitted. They were happy to get it done and the car now feels much better. Top notch job by Sergiu. Would recommend!',
+      'Got my own clutch kit fitted — the car feels much better. Top notch job. Would recommend.',
     rating: 5,
     photo: '/images/stefan.png',
   },
   {
-    name: 'Patrick Horan.',
+    name: 'Patrick Horan',
     rating: 5,
     review:
-      'Very impressed by the work these lads did on my car. They slotted me in at a convenient time and the work was finished when they said it would. Recommend 100%.',
+      'Very impressed. Slotted me in at a convenient time and finished when promised. Recommend 100%.',
     photo: '/images/patrick.png',
   },
   {
     name: 'Donal M.',
     rating: 5,
     review:
-      'Got new tyres here. Decent price and great service. It was a pleasure to deal with these guys.!',
+      'New tyres at a decent price and great service. A pleasure to deal with.',
     photo: '/images/Donal.png',
   },
 ];
 
 function Testimonials() {
-  const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <Star
-          key={i}
-          size={18}
-          className={i <= rating ? 'star-filled' : 'star-empty'}
-          aria-hidden="true"
-        />
-      );
-    }
-    return stars;
-  };
+  const renderStars = (rating) =>
+    Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        size={16}
+        className={
+          i < rating ? 'testimonials__star--filled' : 'testimonials__star'
+        }
+        aria-hidden
+      />
+    ));
 
   return (
-    <section className="testimonials">
-      <h2 className="section-title">What Our Clients Say</h2>
-      <div className="testimonial-cards">
-        {testimonials.map((item, index) => (
-          <article className="testimonial-card" key={index}>
-            <img
-              src={item.photo}
-              alt={item.name}
-              className="client-photo"
-              loading="lazy"
-            />
-            <p className="review">“{item.review}”</p>
-            <div className="stars" aria-label={`${item.rating} out of 5 stars`}>
-              {renderStars(item.rating)}
-            </div>
-            <p className="name">– {item.name}</p>
-          </article>
-        ))}
+    <section className="testimonials section">
+      <div className="section-inner">
+        <p className="section-eyebrow">Reviews</p>
+        <h2 className="section-title">What our clients say</h2>
+        <p className="section-subtitle">
+          Real feedback from drivers across Dublin.
+        </p>
+
+        <div className="testimonials__grid">
+          {testimonials.map((item) => (
+            <article className="testimonials__card" key={item.name}>
+              <img
+                src={item.photo}
+                alt=""
+                className="testimonials__photo"
+                loading="lazy"
+              />
+              <div
+                className="testimonials__stars"
+                aria-label={`${item.rating} out of 5 stars`}
+              >
+                {renderStars(item.rating)}
+              </div>
+              <blockquote className="testimonials__quote">
+                &ldquo;{item.review}&rdquo;
+              </blockquote>
+              <cite className="testimonials__name">{item.name}</cite>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Element, scroller } from 'react-scroll';
@@ -14,44 +13,84 @@ function Home() {
 
   useEffect(() => {
     if (location.state?.scrollTo) {
-      scroller.scrollTo(location.state.scrollTo === 'top' ? 'top' : location.state.scrollTo, {
+      const target =
+        location.state.scrollTo === 'top' ? 'top' : location.state.scrollTo;
+      scroller.scrollTo(target, {
         duration: 500,
         smooth: true,
-        offset: -70,
+        offset: -76,
       });
-
-      // Clear state so scrolling happens only once
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
 
-  const handleBookNow = () => {
-    navigate('/book-now');
-  };
-
   return (
-    <div>
-      {/* Hero Section */}
-      <Element name="top" id="top" className={styles.backgroundWrapper}>
-        <div className={styles.backgroundImage} />
-        <div className={styles.overlay} />
-        <div className={styles.content}>
-          <h1 className={styles.heading}>Professional Car Repair at Your Fingertips</h1>
-          <p className={styles.paragraph}>
-            🛠️ Your trusted mechanic, now online. Fast. Reliable. Local. 🛠️
+    <>
+      <Element name="top" className={styles.hero}>
+        <div className={styles.heroBg} aria-hidden="true" />
+        <div className={styles.heroOverlay} aria-hidden="true" />
+        <div className={styles.heroContent}>
+          <span className={styles.badge}>Dublin · Trusted since 2004</span>
+          <h1 className={styles.heading}>
+            Expert car care,{' '}
+            <span className={styles.headingAccent}>booked in minutes</span>
+          </h1>
+          <p className={styles.subheading}>
+            Oil changes, brakes, diagnostics, NCT prep and more — honest pricing
+            and service you can rely on.
           </p>
-          <button className={styles.bookNowButton} onClick={handleBookNow}>
-            Book Now
-          </button>
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => navigate('/book-now')}
+            >
+              Book a service
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() =>
+                scroller.scrollTo('services', {
+                  duration: 500,
+                  smooth: true,
+                  offset: -76,
+                })
+              }
+            >
+              View services
+            </button>
+          </div>
+          <div className={styles.trustRow}>
+            <div className={styles.trustItem}>
+              <strong>20+</strong>
+              Years experience
+            </div>
+            <div className={styles.trustItem}>
+              <strong>4.9</strong>
+              Customer rating
+            </div>
+            <div className={styles.trustItem}>
+              <strong>Same-week</strong>
+              Appointments
+            </div>
+          </div>
         </div>
       </Element>
 
-      {/* Scrollable Sections */}
-      <Element name="about" id="about"><About /></Element>
-      <Element name="services" id="services"><Services /></Element>
-      <Element name="testimonials" id="testimonials"><Testimonials /></Element>
-      <Element name="contact" id="contact"><Contact /></Element>
-    </div>
+      <Element name="about">
+        <About />
+      </Element>
+      <Element name="services">
+        <Services />
+      </Element>
+      <Element name="testimonials">
+        <Testimonials />
+      </Element>
+      <Element name="contact">
+        <Contact />
+      </Element>
+    </>
   );
 }
 

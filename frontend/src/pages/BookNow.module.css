@@ -1,0 +1,24 @@
+.page {
+  min-height: calc(100vh - var(--nav-height));
+  padding: var(--section-py) 1.5rem;
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
+}
+
+.inner {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  color: var(--color-text);
+}
+
+.subtitle {
+  margin: 0 0 2rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}

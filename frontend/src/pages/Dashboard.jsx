@@ -22,7 +22,7 @@ import {
   BarChart3,
   Phone,
   Mail,
-  MapPin
+  MapPin,
 } from 'lucide-react';
 
 function Dashboard() {
@@ -109,7 +109,10 @@ function Dashboard() {
         </div>
 
         <nav className={styles.sidebarNav}>
-          <Link to="/dashboard" className={`${styles.navLink} ${styles.active}`}>
+          <Link
+            to="/dashboard"
+            className={`${styles.navLink} ${styles.active}`}
+          >
             <BarChart3 size={18} />
             <span>Dashboard</span>
           </Link>
@@ -146,7 +149,9 @@ function Dashboard() {
           <div className={styles.headerContent}>
             <div>
               <h1 className={styles.title}>Good morning, {user?.name}! 👋</h1>
-              <p className={styles.subtitle}>Here's your automotive service overview</p>
+              <p className={styles.subtitle}>
+                Here&apos;s your automotive service overview
+              </p>
             </div>
             <div className={styles.headerActions}>
               <Link to="/book-now" className={styles.primaryButton}>
@@ -175,7 +180,7 @@ function Dashboard() {
             </div>
             <div className={styles.statContent}>
               <h3 className={styles.statNumber}>
-                {bookings.filter(b => new Date(b.date) > new Date()).length}
+                {bookings.filter((b) => new Date(b.date) > new Date()).length}
               </h3>
               <p className={styles.statLabel}>Upcoming</p>
             </div>
@@ -187,7 +192,7 @@ function Dashboard() {
             </div>
             <div className={styles.statContent}>
               <h3 className={styles.statNumber}>
-                {bookings.filter(b => b.status === 'completed').length}
+                {bookings.filter((b) => b.status === 'completed').length}
               </h3>
               <p className={styles.statLabel}>Completed</p>
             </div>
@@ -228,19 +233,29 @@ function Dashboard() {
                 </div>
               ) : (
                 bookings.slice(0, 3).map((booking) => (
-                  <div className={styles.bookingCard} key={booking._id || booking.id}>
+                  <div
+                    className={styles.bookingCard}
+                    key={booking._id || booking.id}
+                  >
                     <div className={styles.bookingHeader}>
                       <div className={styles.serviceInfo}>
-                        <h4 className={styles.serviceName}>{booking.service}</h4>
+                        <h4 className={styles.serviceName}>
+                          {booking.service}
+                        </h4>
                         <div className={styles.bookingMeta}>
                           <span className={styles.bookingDate}>
-                            {new Date(booking.date).toLocaleDateString('en-US', {
-                              weekday: 'short',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
+                            {new Date(booking.date).toLocaleDateString(
+                              'en-US',
+                              {
+                                weekday: 'short',
+                                month: 'short',
+                                day: 'numeric',
+                              },
+                            )}
                           </span>
-                          <span className={styles.bookingTime}>{booking.time}</span>
+                          <span className={styles.bookingTime}>
+                            {booking.time}
+                          </span>
                         </div>
                       </div>
                       <div className={styles.bookingStatus}>
@@ -252,7 +267,9 @@ function Dashboard() {
                     {booking.notes && (
                       <div className={styles.bookingNotes}>
                         <span className={styles.notesLabel}>Notes:</span>
-                        <span className={styles.notesText}>{booking.notes}</span>
+                        <span className={styles.notesText}>
+                          {booking.notes}
+                        </span>
                       </div>
                     )}
                   </div>

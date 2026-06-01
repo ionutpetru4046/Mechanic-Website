@@ -1,9 +1,9 @@
 /* Main container */
 .modern-footer {
-  background-color: #222;
+  background: var(--color-dark);
   color: #fff;
   padding: 4rem 2rem 2rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Footer grid layout */
@@ -73,12 +73,12 @@
   height: 2px;
   bottom: -3px;
   left: 0;
-  background-color: #ffd700;
+  background-color: var(--color-primary);
   transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #ffd700;
+  color: #fdba74;
 }
 
 .nav-link:hover::after {
@@ -140,7 +140,7 @@
 
 .submit-button {
   padding: 0.6rem 1rem;
-  background-color: #ffd700;
+  background-color: var(--color-primary);
   border: none;
   border-radius: 0 4px 4px 0;
   cursor: pointer;
@@ -170,7 +170,7 @@
 }
 
 .social-link:hover {
-  color: #ffd700;
+  color: #fdba74;
 }
 
 .social-icon {
@@ -214,12 +214,12 @@
   height: 2px;
   bottom: -3px;
   left: 0;
-  background-color: #ffd700;
+  background-color: var(--color-primary);
   transition: width 0.3s ease;
 }
 
 .legal-link:hover {
-  color: #ffd700;
+  color: #fdba74;
 }
 
 .legal-link:hover::after {

@@ -1,140 +1,104 @@
-/* Home.module.css */
-
-/* Wrapper for background image and overlay */
-.backgroundWrapper {
+.hero {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--nav-height));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-/* Background image, full cover */
-.backgroundImage {
+.heroBg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-image: url('/background-image.avif');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.6);
-  z-index: 1;
+  transform: scale(1.02);
 }
 
-/* Dark overlay */
-.overlay {
+.heroOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 2;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.88) 0%,
+    rgba(15, 23, 42, 0.55) 45%,
+    rgba(234, 88, 12, 0.35) 100%
+  );
 }
 
-/* Content container */
-.content {
+.heroContent {
   position: relative;
-  z-index: 3;
-  max-width: 900px;
-  padding: 0 20px;
+  z-index: 1;
+  max-width: 720px;
+  padding: 2rem clamp(1.25rem, 4vw, 2rem);
   text-align: center;
   color: #fff;
 }
 
-/* Heading with fade in + color change animation */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+}
+
 .heading {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 1rem;
+}
+
+.headingAccent {
+  color: #fdba74;
+}
+
+.subheading {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 auto 2rem;
+  max-width: 520px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.trustItem {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.trustItem strong {
+  display: block;
+  font-size: 1.125rem;
+  color: #fff;
   font-weight: 700;
-  margin-bottom: 1rem;
-  animation: colorPulse 5s infinite alternate, fadeInUp 1.5s ease forwards;
-}
-
-/* Paragraph with slight delay in animation */
-.paragraph {
-  font-size: 2.25rem;
-  margin-bottom: 2rem;
-  animation: fadeInUp 1.5s ease 0.5s forwards;
-  opacity: 0;
-}
-
-/* Book Now button styling */
-.bookNowButton {
-  background-color: #1976d2;
-  border: none;
-  padding: 0.75rem 2rem;
-  font-size: 1.25rem;
-  color: white;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
-  opacity: 0;
-  animation: fadeInUp 1.5s ease 1s forwards;
-}
-
-.bookNowButton:hover,
-.bookNowButton:focus {
-  background-color: #0d47a1;
-  box-shadow: 0 6px 18px rgba(13, 71, 161, 0.6);
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes colorPulse {
-  0% {
-    color: #1976d2;
-  }
-  50% {
-    color: #ffcc00;
-  }
-  100% {
-    color: #1976d2;
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .heading {
-    font-size: 2.25rem;
-  }
-
-  .paragraph {
-    font-size: 1rem;
-  }
-
-  .bookNowButton {
-    font-size: 1rem;
-    padding: 0.6rem 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .heading {
-    font-size: 1.75rem;
-  }
-
-  .paragraph {
-    font-size: 0.9rem;
-  }
-
-  .bookNowButton {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1.1rem;
-  }
 }

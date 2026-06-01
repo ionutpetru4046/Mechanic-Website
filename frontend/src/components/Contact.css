@@ -1,7 +1,7 @@
 /* Root variables for beautiful contact page */
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --primary-gradient: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+  --secondary-gradient: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
   --card-gradient: linear-gradient(145deg, #ffffff, #f8f9fc);
   --glass-bg: rgba(255, 255, 255, 0.95);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -101,6 +101,8 @@
 .contact-card {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);

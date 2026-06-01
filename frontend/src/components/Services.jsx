@@ -12,65 +12,71 @@ const services = [
   {
     title: 'Oil Change',
     description:
-      'High-quality oil and filter replacements to keep your engine running smoothly.',
+      'Premium oil and filters to keep your engine running smoothly.',
     image: oilImg,
   },
   {
     title: 'Brake Repair',
-    description:
-      'We inspect, repair, and replace brakes with guaranteed performance parts.',
+    description: 'Inspection, repair and replacement with quality parts.',
     image: brakeImg,
   },
   {
     title: 'Engine Diagnostics',
-    description:
-      'Advanced diagnostic tools to detect and fix engine problems accurately.',
+    description: 'Advanced tools to find and fix issues accurately.',
     image: engineImg,
   },
   {
     title: 'Wheel Alignment',
-    description:
-      'Ensure your wheels are aligned properly for smooth and safe driving.',
+    description: 'Precise alignment for safer, smoother driving.',
     image: wheelImg,
   },
   {
-    title: 'AC & Heating Repair',
-    description:
-      'We maintain and repair air conditioning systems for year-round comfort.',
+    title: 'AC & Heating',
+    description: 'Stay comfortable year-round with expert HVAC service.',
     image: acImg,
   },
   {
     title: 'NCT Repairs',
-    description:
-      'We ensure your car passes the NCT test by repairing all necessary faults quickly and efficiently.',
+    description: 'Fast fixes so your car passes inspection first time.',
     image: nctImg,
   },
   {
     title: 'Tyres',
-    description:
-      'We supply and fit high-quality tyres for all car types. Fast service and competitive prices guaranteed.',
+    description: 'Supply and fit quality tyres at competitive prices.',
     image: tyresImg,
   },
 ];
 
 function Services() {
   return (
-    <div className="services-page">
-      <h2 style={{ textAlign: 'center' }}>🛠️ Services We Offer</h2>
-      <div className="services-list">
-        {services.map((service, index) => (
-          <div className="service-card" key={index}>
-            <img
-              src={service.image}
-              alt={service.title}
-              className="service-img"
-            />
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </div>
-        ))}
+    <section className="services section">
+      <div className="section-inner">
+        <p className="section-eyebrow">What we do</p>
+        <h2 className="section-title">Services we offer</h2>
+        <p className="section-subtitle">
+          From routine maintenance to complex repairs — all under one roof.
+        </p>
+
+        <div className="services__grid">
+          {services.map((service) => (
+            <article className="services__card" key={service.title}>
+              <div className="services__imageWrap">
+                <img
+                  src={service.image}
+                  alt=""
+                  className="services__image"
+                  loading="lazy"
+                />
+              </div>
+              <div className="services__body">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
