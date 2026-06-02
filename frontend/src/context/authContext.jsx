@@ -1,7 +1,7 @@
 // src/context/authContext.jsx
 import { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import API from '../api/api';
 
 const AuthContext = createContext();
 
@@ -15,8 +15,7 @@ export const AuthProvider = ({ children }) => {
       // Fetch full user profile on app load
       const fetchUser = async () => {
         try {
-          const VITE_API_URL = import.meta.env.VITE_API_URL;
-          const res = await axios.get(`${VITE_API_URL}/api/users/profile`, {
+          const res = await API.get('/users/profile', {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser({ ...res.data, token }); // store user data + token

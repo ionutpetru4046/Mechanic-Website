@@ -11,6 +11,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Parse incoming data
 app.use(express.json());
@@ -46,6 +47,19 @@ const startServer = async () => {
   if (!MONGO_URI) {
     console.error(
       '❌ MONGO_URI (or MONGODB_URI) is not set. Add it in .env locally or in Render environment variables.',
+    );
+    process.exit(1);
+  }
+
+  if (!/\.mongodb\.net\/[^/?]+/.test(MONGO_URI)) {
+    console.warn(
+      '⚠️ MONGO_URI has no database name (defaults to "test"). Use …mongodb.net/mechanic-website?… in .env and on Render.',
+    );
+  }
+
+  if (!JWT_SECRET) {
+    console.error(
+      '❌ JWT_SECRET is not set. Auth (login/register) will fail without it.',
     );
     process.exit(1);
   }

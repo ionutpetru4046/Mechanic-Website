@@ -1,4 +1,5 @@
 import './Footer.css';
+import { Link } from 'react-router-dom';
 import {
   Facebook,
   Twitter,
@@ -8,145 +9,161 @@ import {
   Mail,
   MapPin,
   Phone,
-  ArrowRight,
 } from 'lucide-react';
 
+const QUICK_LINKS = [
+  { label: 'Home', to: '/' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'Testimonials', to: '/testimonials' },
+  { label: 'Contact', to: '/contact' },
+];
+
+const SERVICE_LINKS = [
+  'Oil Change',
+  'Brake Repairs',
+  'Engine Diagnostics',
+  'Wheel Alignment',
+  'NCT Repairs',
+  'Tyres',
+];
+
+const OPENING_HOURS = [
+  { day: 'Monday', hours: '8 a.m. – 5 p.m.' },
+  { day: 'Tuesday', hours: '8 a.m. – 5 p.m.' },
+  { day: 'Wednesday', hours: '8 a.m. – 5 p.m.' },
+  { day: 'Thursday', hours: '8 a.m. – 5 p.m.' },
+  { day: 'Friday', hours: '9 a.m. – 5 p.m.' },
+  { day: 'Saturday', hours: '9 a.m. – 1 p.m.' },
+  { day: 'Sunday', hours: 'Closed', closed: true },
+];
+
+const SOCIAL_LINKS = [
+  { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+  { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: Github, href: 'https://github.com', label: 'GitHub' },
+];
+
+const LEGAL_LINKS = [
+  { label: 'Privacy Policy', to: '/privacy-policy' },
+  { label: 'Terms of Service', to: '/terms-of-service' },
+  { label: 'Cookie Policy', to: '/cookie-policy' },
+];
+
+function serviceHref(service) {
+  return `/services/${service.toLowerCase().replace(' ', '-')}`;
+}
+
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="modern-footer">
-      {/* Main Footer Content */}
-      <div className="footer-container">
-        <div className="footer-grid">
-          {/* Company Info */}
-          <div className="company-section">
-            <div>
-              <h3 className="brand-name">Expert Automotive</h3>
-              <p className="company-description">
-                Always focusing on the customer needs always a good choice
-                booking with Expert Automotive.
-              </p>
-            </div>
+    <footer className="footer">
+      <div className="footer__accent" aria-hidden="true" />
 
-            {/* Contact Info */}
-            <div className="contact-info">
-              <div className="contact-item">
-                <MapPin className="contact-icon" />
-                <span>
+      <div className="footer__container">
+        <div className="footer__grid">
+          <div className="footer__brand">
+            <h2 className="footer__title">Expert Automotive</h2>
+            <p className="footer__tagline">
+              Always focusing on the customer needs always a good choice booking
+              with Expert Automotive.
+            </p>
+
+            <ul className="footer__contact">
+              <li>
+                <MapPin className="footer__contact-icon" aria-hidden="true" />
+                <address>
                   59B Dorset Street Lower, Phibsborough, Dublin 1, D01 C5R3
-                </span>
-              </div>
-              <div className="contact-item">
-                <Phone className="contact-icon" />
-                <span> 0877113822</span>
-              </div>
-              <div className="contact-item">
-                <Mail className="contact-icon" />
-                <span>contact@expertautomotive.com</span>
-              </div>
+                </address>
+              </li>
+              <li>
+                <Phone className="footer__contact-icon" aria-hidden="true" />
+                <a href="tel:+353877113822">0877113822</a>
+              </li>
+              <li>
+                <Mail className="footer__contact-icon" aria-hidden="true" />
+                <a href="mailto:contact@expertautomotive.com">
+                  contact@expertautomotive.com
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <nav className="footer__nav" aria-label="Quick links">
+            <h3 className="footer__heading">Quick Links</h3>
+            <ul className="footer__link-list">
+              {QUICK_LINKS.map(({ label, to }) => (
+                <li key={to}>
+                  <Link to={to} className="footer__link">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav className="footer__nav" aria-label="Services">
+            <h3 className="footer__heading">Services</h3>
+            <ul className="footer__link-list">
+              {SERVICE_LINKS.map((service) => (
+                <li key={service}>
+                  <a href={serviceHref(service)} className="footer__link">
+                    {service}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="footer__hours-block">
+            <h3 className="footer__heading">Opening Hours</h3>
+            <div className="footer__hours-card">
+              <ul className="footer__hours-list">
+                {OPENING_HOURS.map(({ day, hours, closed }) => (
+                  <li
+                    key={day}
+                    className={`footer__hours-row${closed ? ' footer__hours-row--closed' : ''}`}
+                  >
+                    <span className="footer__hours-day">{day}</span>
+                    <span className="footer__hours-time">{hours}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
 
-          {/* Quick Links */}
-          <div className="nav-section">
-            <h4 className="section-title">Quick Links</h4>
-            <nav className="nav-list">
-              <a href="/" className="nav-link">
-                Home
-              </a>
-              <a href="/about" className="nav-link">
-                About Us
-              </a>
-              <a href="/services" className="nav-link">
-                Services
-              </a>
-              <a href="/testimonials" className="nav-link">
-                Testimonials
-              </a>
-              <a href="/contact" className="nav-link">
-                Contact
-              </a>
-            </nav>
-          </div>
-
-          {/* Services */}
-          <div className="nav-section">
-            <h4 className="section-title">Services</h4>
-            <nav className="nav-list">
-              {[
-                'Oil Change',
-                'Brake Repairs',
-                'Engine Diagnostics',
-                'Wheel Alignment',
-                'NCT Repairs',
-                'Tyres',
-              ].map((service) => (
+            <div className="footer__social">
+              {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
                 <a
-                  key={service}
-                  href={`/services/${service.toLowerCase().replace(' ', '-')}`}
-                  className="nav-link"
+                  key={label}
+                  href={href}
+                  className="footer__social-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit us on ${label}`}
                 >
-                  {service}
+                  <Icon className="footer__social-icon" aria-hidden="true" />
                 </a>
               ))}
-            </nav>
-          </div>
-
-          {/* Newsletter */}
-          <div className="newsletter-section">
-            <h4 className="section-title">Opening Hours</h4>
-
-            <div>
-              <div className="newsletter-form">
-                <p>
-                  Monday 8 a.m. - 5 p.m. <br />
-                  Tuesday 8 a.m. - 5 p.m. <br />
-                  Wednesday 8 a.m. - 5 p.m. <br />
-                  Thursday 8 a.m. - 5 p.m. <br />
-                  Friday 9 a.m. - 5 p.m. <br />
-                  Saturday 9 a.m. - 1 p.m. <br />
-                  Sunday Closed
-                </p>
-              </div>
-
-              {/* Social Links */}
-              <div className="social-links">
-                {[
-                  { icon: Facebook, href: 'https://facebook.com' },
-                  { icon: Twitter, href: 'https://twitter.com' },
-                  { icon: Instagram, href: 'https://instagram.com' },
-                  { icon: Linkedin, href: 'https://linkedin.com' },
-                  { icon: Github, href: 'https://github.com' },
-                ].map(({ icon: Icon, href }, index) => (
-                  <a key={index} href={href} className="social-link">
-                    <Icon className="social-icon" />
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <hr className="footer-separator" />
-
-      {/* Bottom Bar */}
-      <div className="bottom-bar">
-        <div className="bottom-content">
-          <div className="copyright">
-            © 2025 Expert Automotive. All rights reserved.
-          </div>
-
-          <div className="legal-links">
-            <a href="/privacy-policy" className="legal-link">
-              Privacy Policy
-            </a>
-            <a href="/terms-of-service" className="legal-link">
-              Terms of Service
-            </a>
-            <a href="/cookie-policy" className="legal-link">
-              Cookie Policy
-            </a>
-          </div>
+      <div className="footer__bottom">
+        <div className="footer__bottom-inner">
+          <p className="footer__copyright">
+            © {year} Expert Automotive. All rights reserved.
+          </p>
+          <nav className="footer__legal" aria-label="Legal">
+            {LEGAL_LINKS.map(({ label, to }) => (
+              <Link key={to} to={to} className="footer__legal-link">
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>
