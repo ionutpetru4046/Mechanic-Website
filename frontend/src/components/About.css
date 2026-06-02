@@ -1,79 +1,105 @@
 .about {
   background: var(--color-surface);
+  min-height: 100vh;
+  padding: 4rem 0 2rem 0;
 }
 
 .about__title,
 .about .section-title {
   text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
 }
 
 .about__intro {
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 0 auto 3rem auto;
+  max-width: 700px;
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
 }
 
 .about__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+  align-items: stretch;
 }
 
 .about__card {
-  padding: 1.75rem;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  transition: box-shadow var(--transition), transform var(--transition);
+  padding: 2.5rem 2rem;
+  background: var(--color-bg-glass, rgba(255,255,255,0.75));
+  backdrop-filter: blur(6px);
+  border: none;
+  border-radius: var(--radius-xl, 1.25rem);
+  box-shadow: 0 6px 24px 0 rgba(0,0,0,0.08), 0 1.5px 7px 0 rgba(0,0,0,0.06);
+  transition: box-shadow .25s cubic-bezier(.4,0,.2,1), transform .2s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  overflow: hidden;
 }
 
 .about__card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+  box-shadow: 0 12px 32px 0 rgba(30,40,90,0.18), 0 4px 15px 0 rgba(30,40,90,0.12);
+  transform: translateY(-8px) scale(1.025);
 }
 
 .about__card h3,
 .about__team h3 {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0 0 0.75rem;
-  color: var(--color-text);
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 1.25rem;
+  color: var(--color-primary-dark, #1b263b);
+  letter-spacing: -0.01em;
 }
 
 .about__icon {
   color: var(--color-primary);
-  font-size: 1.25rem;
+  font-size: 1.75rem;
+  filter: drop-shadow(0 1px 4px rgba(40,70,240,0.05));
 }
 
 .about__card p,
 .about__team p {
   margin: 0;
   color: var(--color-text-muted);
-  line-height: 1.65;
+  line-height: 1.8;
+  font-size: 1.09rem;
 }
 
 .about__list {
   margin: 0;
-  padding-left: 1.25rem;
+  padding-left: 1.6rem;
   color: var(--color-text-muted);
   line-height: 1.8;
+  font-size: 1.09rem;
+  list-style: disc inside;
 }
 
 .about__team {
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   text-align: center;
   background: linear-gradient(
-    135deg,
-    var(--color-primary-soft) 0%,
-    var(--color-accent-soft) 100%
+    120deg,
+    var(--color-primary-soft, #e3f0ff) 0%,
+    var(--color-accent-soft, #ffe3e9) 100%
   );
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl, 1.25rem);
+  box-shadow: 0 5px 30px 0 rgba(93, 123, 255, 0.13);
+  border: none;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .about__team h3 {
   justify-content: center;
+  color: var(--color-primary-dark, #1b263b);
+  font-weight: 800;
 }
