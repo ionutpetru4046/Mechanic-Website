@@ -244,7 +244,7 @@ const MyBookings = () => {
                   onClick={() => handleDelete(booking._id)}
                   disabled={actionLoading}
                 >
-                  Cancel
+                  Delete
                 </button>
               </div>
             </li>
