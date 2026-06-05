@@ -135,8 +135,27 @@ function Dashboard() {
         </nav>
 
         <div className={styles.sidebarFooter}>
-          <button onClick={handleLogout} className={styles.logoutButton}>
-            <LogOut size={18} />
+          {/* 
+            Change: Add inline style to ensure button text/icon are visible in red,
+            and add fallback class if needed
+          */}
+          <button
+            onClick={handleLogout}
+            className={styles.logoutButton}
+            style={{
+              color: '#dc2626', // Tailwind red-600
+              border: '1px solid #dc2626',
+              background: 'transparent',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontWeight: 600,
+              padding: '0.5rem 1rem',
+              cursor: 'pointer',
+            }}
+            aria-label="Sign Out"
+          >
+            <LogOut size={18} color="#dc2626" />
             <span>Sign Out</span>
           </button>
         </div>
