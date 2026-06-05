@@ -7,7 +7,9 @@ const router = express.Router();
 // GET all bookings for the logged-in user
 router.get('/booking', authenticate, async (req, res) => {
   try {
-    const bookings = await Booking.find({ user: req.user.id }).sort({ date: 1 });
+    const bookings = await Booking.find({ user: req.user.id }).sort({
+      date: 1,
+    });
     res.json({ bookings });
   } catch (err) {
     console.error(err);
