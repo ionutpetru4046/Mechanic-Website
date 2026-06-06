@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
 
+  const isAdmin = user?.role === 'admin';
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -45,7 +47,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, login, logout, loadingAuth }}>
+    <AuthContext.Provider
+      value={{ user, setUser, login, logout, loadingAuth, isAdmin }}
+    >
       {children}
     </AuthContext.Provider>
   );

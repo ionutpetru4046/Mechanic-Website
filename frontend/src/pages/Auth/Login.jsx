@@ -21,7 +21,11 @@ const Login = () => {
       const res = await API.post('/auth/login', form);
       const { token, ...user } = res.data;
       login(user, token);
-      navigate('/dashboard');
+      if (user.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     }
