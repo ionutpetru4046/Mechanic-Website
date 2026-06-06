@@ -27,10 +27,30 @@ router.patch('/admin/bookings/:id', authenticate, isAdmin, async (req, res) => {
       return res.status(404).json({ message: 'Booking not found' });
     }
 
-    booking.status = req.body.status || booking.status;
+    const rawStatus = req.body.status;
+
+    if (rawStatus) {
+      // normalize status values to match schema enum (capitalized)
+      const map = {
+        pending: 'Pending',
+        confirmed: 'Confirmed',
+        completed: 'Completed',
+        cancelled: 'Cancelled',
+        canceled: 'Cancelled',
+      };
+
+      const mapped = map[String(rawStatus).toLowerCase()];
+
+      if (!mapped) {
+        return res.status(400).json({ message: 'Invalid status value' });
+      }
+
+      booking.status = mapped;
+    }
+
     await booking.save();
-    const updated = await Booking.findById(req.params.id)
-      .populate('user', 'name email');
+
+    const updated = await Booking.findById(req.params.id).populate('user', 'name email');
 
     res.json(updated);
   } catch (err) {
@@ -51,7 +71,6 @@ router.get('/', authenticate, async (req, res) => {
     res.status(500).json({ message: 'Server error fetching bookings' });
   }
 });
-
 router.post('/', authenticate, async (req, res) => {
   const { service, date, time, notes } = req.body;
 
