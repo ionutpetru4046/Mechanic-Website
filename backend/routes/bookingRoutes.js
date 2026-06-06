@@ -21,6 +21,28 @@ router.get('/admin/bookings', authenticate, isAdmin, async (req, res) => {
   }
 });
 
+// update admin endpoint
+router.patch('/admin/bookings/:id', authenticate, isAdmin, async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    booking.status = req.body.status || booking.status;
+
+    const updated = await booking.save();
+
+    res.json(updated);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Server error updating booking',
+    });
+  }
+});
+
 // GET all bookings for the logged-in user
 router.get('/booking', authenticate, async (req, res) => {
   try {
