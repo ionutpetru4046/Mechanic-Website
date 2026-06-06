@@ -18,6 +18,10 @@ import MyBookings from './pages/MyBookings';
 
 import PrivateRoute from './routes/PrivateRoute';
 
+// Admin-specific imports
+import AdminDashboard from './pages/AdminDashboard'; // make sure this path is correct
+import AdminRoute from './routes/AdminRoute'; // make sure this path is correct
+
 import './index.css';
 
 function App() {
@@ -30,6 +34,7 @@ function App() {
     '/register',
     '/book-now',
     '/my-bookings',
+    '/admin',
   ];
 
   const hideNavFooter = NO_NAV_FOOTER_ROUTES.includes(location.pathname);
@@ -57,6 +62,16 @@ function App() {
           <Route path="/book-now" element={<BookNow />} />
           <Route path="/my-bookings" element={<MyBookings />} />
         </Route>
+
+        {/* Admin Protected Route */}
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
       </Routes>
 
       {!hideNavFooter && <Footer />}
