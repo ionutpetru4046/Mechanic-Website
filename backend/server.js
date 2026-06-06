@@ -1,9 +1,8 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/users.js';
-import bookingRouter from './routes/bookingRoutes.js';
-import userBookingRouter from './routes/bookings.js';
+import bookingRouter from './routes/bookings.js';
+import connectDB from './config/db.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -37,7 +36,6 @@ app.use(
 // ✅ Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/bookings', userBookingRouter);
 app.use('/api/bookings', bookingRouter);
 
 app.get('/', (req, res) => {
@@ -67,7 +65,7 @@ const startServer = async () => {
   }
 
   try {
-    await mongoose.connect(MONGO_URI);
+    await connectDB();
     console.log('✅ Connected to MongoDB');
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../api/api';
 import styles from './BookingForm.module.css';
 
 function BookingForm() {
@@ -22,38 +23,24 @@ function BookingForm() {
       return;
     }
 
-    const token = localStorage.getItem('token');
-
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
     try {
-      const response = await fetch(`${backendUrl}/api/bookings`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : '',
-        },
-        body: JSON.stringify({ service, date, time, notes }),
+      const response = await API.post('/bookings', {
+        service,
+        date,
+        time,
+        notes,
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || 'Booking failed');
-      }
-
-      const data = await response.json();
       setSuccess('Booking successful!');
       setError('');
       setService('');
       setDate('');
       setTime('');
       setNotes('');
-      console.log('Booking response:', data);
 
       navigate('/dashboard');
-
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || err.message || 'Booking failed');
       setSuccess('');
       console.error('Booking failed:', err);
     }

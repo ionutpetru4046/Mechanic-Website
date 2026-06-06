@@ -20,14 +20,17 @@ const Register = () => {
     try {
       const res = await API.post('/auth/register', form);
       const { token, ...user } = res.data;
-      if (token) {
-        login(user, token);
-        navigate('/dashboard');
-      } else {
-        navigate('/auth');
+
+      if (!token) {
+        throw new Error('Registration succeeded but no token returned');
       }
+
+      login(user, token);
+      navigate('/dashboard', { replace: true });
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      // eslint-disable-next-line no-console
+      console.error('Registration error:', err);
+      setError(err.response?.data?.message || err.message || 'Registration failed');
     }
   };
 

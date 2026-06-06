@@ -20,14 +20,23 @@ const Login = () => {
     try {
       const res = await API.post('/auth/login', form);
       const { token, ...user } = res.data;
+
+      if (!token) {
+        throw new Error('Login succeeded but no token was returned');
+      }
+
       login(user, token);
-      if (user.role === 'admin') {
-        navigate('/admin');
+
+      const role = user.role?.toLowerCase() || 'user';
+      if (role === 'admin') {
+        navigate('/admin', { replace: true });
       } else {
-        navigate('/dashboard');
+        navigate('/dashboard', { replace: true });
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      // eslint-disable-next-line no-console
+      console.error('Login error:', err);
+      setError(err.response?.data?.message || err.message || 'Login failed');
     }
   };
 

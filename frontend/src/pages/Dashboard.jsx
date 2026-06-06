@@ -23,6 +23,7 @@ import {
   Phone,
   Mail,
   MapPin,
+  ArrowRight,
 } from 'lucide-react';
 
 function Dashboard() {
@@ -49,7 +50,12 @@ function Dashboard() {
         });
         setUser(userRes.data);
 
-        const bookingsRes = await API.get('/bookings', {
+        const bookingsEndpoint =
+          userRes.data.role === 'admin'
+            ? '/bookings/admin/bookings'
+            : '/bookings';
+
+        const bookingsRes = await API.get(bookingsEndpoint, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBookings(bookingsRes.data.bookings || []);
@@ -103,7 +109,9 @@ function Dashboard() {
             </div>
             <div className={styles.userDetails}>
               <span className={styles.userName}>{user?.name}</span>
-              <span className={styles.userRole}>Customer</span>
+              <span className={styles.userRole}>
+                {user?.role === 'admin' ? 'Admin' : 'Customer'}
+              </span>
             </div>
           </div>
         </div>
@@ -120,9 +128,14 @@ function Dashboard() {
             <Plus size={18} />
             <span>Book Service</span>
           </Link>
-          <Link to="/my-bookings" className={styles.navLink}>
+          <Link
+            to={user?.role === 'admin' ? '/admin/bookings' : '/my-bookings'}
+            className={styles.navLink}
+          >
             <BookOpen size={18} />
-            <span>My Bookings</span>
+            <span>
+              {user?.role === 'admin' ? 'View Bookings' : 'My Bookings'}
+            </span>
           </Link>
           <Link to="/dashboard" className={styles.navLink}>
             <TrendingUp size={18} />
@@ -234,7 +247,10 @@ function Dashboard() {
           <section className={styles.section}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Recent Bookings</h2>
-              <Link to="/my-bookings" className={styles.viewAll}>
+              <Link
+                to={user?.role === 'admin' ? '/admin/bookings' : '/my-bookings'}
+                className={styles.viewAll}
+              >
                 View All
               </Link>
             </div>
@@ -315,16 +331,27 @@ function Dashboard() {
                 </div>
               </Link>
 
-              <Link to="/my-bookings" className={styles.actionCard}>
+              <Link
+                to={user?.role === 'admin' ? '/admin/bookings' : '/my-bookings'}
+                className={styles.actionCard}
+              >
                 <div className={styles.actionIcon}>
                   <BookOpen size={24} />
                 </div>
                 <div className={styles.actionContent}>
-                  <h4>View Bookings</h4>
-                  <p>Manage your appointments</p>
+                  <h4>
+                    {user?.role === 'admin'
+                      ? 'View All Bookings'
+                      : 'View Bookings'}
+                  </h4>
+                  <p>
+                    {user?.role === 'admin'
+                      ? 'Manage all customer appointments'
+                      : 'Manage your appointments'}
+                  </p>
                 </div>
                 <div className={styles.actionArrow}>
-                  <Calendar size={16} />
+                  <ArrowRight size={16} />
                 </div>
               </Link>
 

@@ -1,10 +1,43 @@
 import express from 'express';
 import Booking from '../models/Booking.js';
 import authenticate from '../middleware/authenticate.js';
+import isAdmin from '../middleware/isAdmin.js';
 
 const router = express.Router();
 
-// GET all bookings for logged-in user
+// Admin routes
+router.get('/admin/bookings', authenticate, isAdmin, async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+      .populate('user', 'name email')
+      .sort({ createdAt: -1 });
+
+    res.json({ bookings });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error fetching admin bookings' });
+  }
+});
+
+router.patch('/admin/bookings/:id', authenticate, isAdmin, async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    booking.status = req.body.status || booking.status;
+    const updated = await booking.save();
+
+    res.json(updated);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error updating booking' });
+  }
+});
+
+// User booking routes
 router.get('/', authenticate, async (req, res) => {
   try {
     const bookings = await Booking.find({ user: req.user.id }).sort({
@@ -17,7 +50,6 @@ router.get('/', authenticate, async (req, res) => {
   }
 });
 
-// POST create new booking
 router.post('/', authenticate, async (req, res) => {
   const { service, date, time, notes } = req.body;
 
@@ -30,15 +62,14 @@ router.post('/', authenticate, async (req, res) => {
       notes,
     });
 
-    await booking.save();
-    res.status(201).json(booking);
+    const savedBooking = await booking.save();
+    res.status(201).json(savedBooking);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error creating booking' });
   }
 });
 
-// PUT update booking by ID
 router.put('/:id', authenticate, async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
@@ -48,7 +79,6 @@ router.put('/:id', authenticate, async (req, res) => {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
-    // Update only provided fields
     booking.service = req.body.service || booking.service;
     booking.date = req.body.date || booking.date;
     booking.time = req.body.time || booking.time;
@@ -62,7 +92,6 @@ router.put('/:id', authenticate, async (req, res) => {
   }
 });
 
-// DELETE booking by ID
 router.delete('/:id', authenticate, async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);

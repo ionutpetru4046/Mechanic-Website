@@ -9,7 +9,7 @@ function BookingList() {
   useEffect(() => {
     API.get('/bookings')
       .then((res) => {
-        setBookings(res.data);
+        setBookings(res.data.bookings || []);
         setLoading(false);
       })
       .catch((err) => {

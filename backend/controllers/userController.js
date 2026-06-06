@@ -14,7 +14,7 @@ export const getUserProfile = async (req, res) => {
       email: user.email,
       role: user.role,
     });
-  } catch (err) {
+  } catch {
     res.status(500).json({ message: 'Server error' });
   }
 };
