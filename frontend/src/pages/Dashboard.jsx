@@ -72,6 +72,24 @@ function Dashboard() {
     fetchData();
   }, [navigate]);
 
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'confirmed':
+      case 'completed':
+        return <CheckCircle size={14} />;
+      case 'cancelled':
+      case 'canceled':
+        return <AlertCircle size={14} />;
+      default:
+        return <AlertCircle size={14} />;
+    }
+  };
+
+  const formatStatus = (status) => {
+    if (!status) return 'Scheduled';
+    return status.charAt(0).toUpperCase() + status.slice(1);
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/login');
@@ -294,8 +312,8 @@ function Dashboard() {
                         </div>
                       </div>
                       <div className={styles.bookingStatus}>
-                        <AlertCircle size={14} />
-                        <span>Scheduled</span>
+                        {getStatusIcon(booking.status)}
+                        <span>{formatStatus(booking.status)}</span>
                       </div>
                     </div>
 

@@ -37,8 +37,8 @@ const AdminBookings = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await API.patch(
-          `/bookings/admin/bookings/${id}`,
+      const res = await API.patch(
+        `/bookings/admin/bookings/${id}`,
         { status },
         {
           headers: {
@@ -47,8 +47,23 @@ const AdminBookings = () => {
         },
       );
 
-      fetchBookings(); // refresh
-    } catch (err) {
+      const updatedBooking = res.data;
+      setBookings((prev) =>
+        prev.map((booking) => {
+          if (booking._id !== id) return booking;
+
+          const mergedBooking = { ...booking, ...updatedBooking };
+          const shouldPreserveUser =
+            !updatedBooking.user || typeof updatedBooking.user === 'string';
+
+          if (shouldPreserveUser) {
+            mergedBooking.user = booking.user;
+          }
+
+          return mergedBooking;
+        }),
+      );
+    } catch {
       alert('Failed to update status');
     }
   };

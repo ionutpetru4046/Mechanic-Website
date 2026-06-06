@@ -28,7 +28,9 @@ router.patch('/admin/bookings/:id', authenticate, isAdmin, async (req, res) => {
     }
 
     booking.status = req.body.status || booking.status;
-    const updated = await booking.save();
+    await booking.save();
+    const updated = await Booking.findById(req.params.id)
+      .populate('user', 'name email');
 
     res.json(updated);
   } catch (err) {
