@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/users.js';
 import bookingRouter from './routes/bookingRoutes.js';
+import userBookingRouter from './routes/bookings.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -36,6 +37,7 @@ app.use(
 // ✅ Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/bookings', userBookingRouter);
 app.use('/api/bookings', bookingRouter);
 
 app.get('/', (req, res) => {
