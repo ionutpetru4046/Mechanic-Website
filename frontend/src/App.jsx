@@ -19,7 +19,7 @@ import MyBookings from './pages/MyBookings';
 import PrivateRoute from './routes/PrivateRoute';
 
 // Admin-specific imports
-import AdminDashboard from './pages/AdminDashboard'; // make sure this path is correct
+import AdminDashboard from './pages/admin/AdminDashboard'; // make sure this path is correct
 import AdminRoute from './routes/AdminRoute'; // make sure this path is correct
 
 import './index.css';
