@@ -6,7 +6,7 @@ const authenticate = async (req, res, next) => {
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({
-      message: 'Authentication required. Please log in.',
+      message: 'Authentication Required. Please Log In or Register.',
     });
   }
 
@@ -18,13 +18,15 @@ const authenticate = async (req, res, next) => {
     const user = await User.findById(decoded.id).select('-password');
 
     if (!user) {
-      return res.status(401).json({ message: 'User not found' });
+      return res.status(401).json({
+        message: 'User not found',
+      });
     }
 
-    req.user = user; // 👈 FULL USER OBJECT
+    req.user = user;
 
     next();
-  } catch (error) {
+  } catch {
     return res.status(401).json({
       message: 'Token invalid or expired',
     });
