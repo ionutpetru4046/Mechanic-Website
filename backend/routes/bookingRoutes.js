@@ -1,8 +1,25 @@
 import express from 'express';
 import Booking from '../models/Booking.js';
 import authenticate from '../middleware/authenticate.js';
+import isAdmin from '../middleware/isAdmin.js';
 
 const router = express.Router();
+
+// admin routes
+router.get('/admin/bookings', authenticate, isAdmin, async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+      .populate('user', 'name email')
+      .sort({ createdAt: -1 });
+
+    res.json({ bookings });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      message: 'Server error fetching admin bookings',
+    });
+  }
+});
 
 // GET all bookings for the logged-in user
 router.get('/booking', authenticate, async (req, res) => {
