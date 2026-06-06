@@ -16,7 +16,7 @@ const AdminBookings = () => {
     try {
       setLoading(true);
 
-      const res = await API.get('/admin/bookings', {
+      const res = await API.get('/bookings/admin/bookings', {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -38,7 +38,7 @@ const AdminBookings = () => {
   const updateStatus = async (id, status) => {
     try {
       await API.patch(
-        `/admin/bookings/${id}`,
+          `/bookings/admin/bookings/${id}`,
         { status },
         {
           headers: {

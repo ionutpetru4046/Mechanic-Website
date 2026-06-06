@@ -20,11 +20,18 @@ export const AuthProvider = ({ children }) => {
           const res = await API.get('/users/profile', {
             headers: { Authorization: `Bearer ${token}` },
           });
-          setUser({ ...res.data, token }); // store user data + token
+          const loadedUser = { ...res.data, token };
+          setUser(loadedUser); // store user data + token
+          // runtime debug: log loaded user for troubleshooting role-based routes
+          // (Remove or guard this in production)
+          // eslint-disable-next-line no-console
+          console.log('AuthProvider: loaded user', loadedUser);
         } catch {
           // invalid token or fetch failed
           localStorage.removeItem('token');
           setUser(null);
+          // eslint-disable-next-line no-console
+          console.log('AuthProvider: failed to load user (invalid token)');
         } finally {
           setLoadingAuth(false);
         }
@@ -32,12 +39,16 @@ export const AuthProvider = ({ children }) => {
       fetchUser();
     } else {
       setLoadingAuth(false);
+      // eslint-disable-next-line no-console
+      console.log('AuthProvider: no token found');
     }
   }, []);
 
   const login = (userData, token) => {
     localStorage.setItem('token', token);
     setUser({ ...userData, token });
+    // eslint-disable-next-line no-console
+    console.log('AuthProvider: login', { ...userData, token });
   };
 
   const logout = () => {

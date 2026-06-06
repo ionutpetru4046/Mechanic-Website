@@ -19,8 +19,9 @@ import MyBookings from './pages/MyBookings';
 import PrivateRoute from './routes/PrivateRoute';
 
 // Admin-specific imports
-import AdminDashboard from './pages/admin/AdminDashboard'; // make sure this path is correct
-import AdminRoute from './routes/AdminRoute'; // make sure this path is correct
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminBookings from './pages/admin/AdminBookings';
+import AdminRoute from './routes/AdminRoute';
 
 import './index.css';
 
@@ -63,12 +64,20 @@ function App() {
           <Route path="/my-bookings" element={<MyBookings />} />
         </Route>
 
-        {/* Admin Protected Route */}
+        {/* Admin Protected Routes */}
         <Route
           path="/admin"
           element={
             <AdminRoute>
               <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/bookings"
+          element={
+            <AdminRoute>
+              <AdminBookings />
             </AdminRoute>
           }
         />
