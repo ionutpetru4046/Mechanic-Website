@@ -1,19 +1,33 @@
-/* eslint-disable prettier/prettier */
 import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Authentication Required. Please Log In or Register.' });
+    return res.status(401).json({
+      message: 'Authentication required. Please log in.',
+    });
   }
 
   const token = authHeader.split(' ')[1];
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { id: decoded.id }; // assuming payload has user id
+
+    const user = await User.findById(decoded.id).select('-password');
+
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
+
+    req.user = user; // 👈 FULL USER OBJECT
+
     next();
-  } catch {
-    return res.status(401).json({ message: 'Token invalid or expired' });
+  } catch (error) {
+    return res.status(401).json({
+      message: 'Token invalid or expired',
+    });
   }
 };
 
