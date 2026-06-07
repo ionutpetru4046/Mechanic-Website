@@ -15,6 +15,7 @@ import AuthPage from './pages/Auth/AuthPage';
 import Dashboard from './pages/Dashboard';
 import BookNow from './pages/BookNow';
 import MyBookings from './pages/MyBookings';
+import Profile from './pages/Profile';
 
 import PrivateRoute from './routes/PrivateRoute';
 
@@ -62,6 +63,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/book-now" element={<BookNow />} />
           <Route path="/my-bookings" element={<MyBookings />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
 
         {/* Admin Protected Routes */}

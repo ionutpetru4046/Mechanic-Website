@@ -1,7 +1,19 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // fixed import here
+import { useNavigate } from 'react-router-dom';
+import API from '../api/api';
 import './MyBookings.css';
+
+const statusStyles = {
+  pending: { background: '#f8faf5', color: '#b45309' },
+  confirmed: { background: '#ecfdf5', color: '#0f766e' },
+  completed: { background: '#eff6ff', color: '#1d4ed8' },
+  cancelled: { background: '#fef2f2', color: '#b91c1c' },
+};
+
+const formatStatus = (status) => {
+  if (!status) return 'Pending';
+  return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
+};
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -14,60 +26,41 @@ const MyBookings = () => {
     time: '',
     notes: '',
   });
-  const [actionLoading, setActionLoading] = useState(false); // for delete/update button loading
+  const [actionLoading, setActionLoading] = useState(false);
 
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+
+  const fetchBookings = async () => {
+    setLoading(true);
+    try {
+      const res = await API.get('/bookings');
+      if (Array.isArray(res.data.bookings)) {
+        setBookings(res.data.bookings);
+        setError('');
+      } else {
+        setError('Unexpected response from server.');
+      }
+    } catch (err) {
+      console.error('Error fetching bookings:', err);
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        navigate('/login');
+      } else {
+        setError('Failed to load bookings. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-
-    const fetchBookings = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/bookings`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        );
-
-        if (Array.isArray(res.data.bookings)) {
-          setBookings(res.data.bookings);
-          setError('');
-        } else {
-          setError('Unexpected response from server.');
-        }
-      } catch (err) {
-        console.error('Error fetching bookings:', err);
-        if (err.response?.status === 401 || err.response?.status === 403) {
-          navigate('/login');
-        } else {
-          setError('Failed to load bookings. Please try again.');
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchBookings();
-  }, [navigate, token]);
+  }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to cancel this booking?'))
-      return;
-
+    if (!window.confirm('Are you sure you want to cancel this booking?')) return;
     setActionLoading(true);
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      await API.delete(`/bookings/${id}`);
       setBookings((prev) => prev.filter((b) => b._id !== id));
       setError('');
     } catch (err) {
@@ -81,8 +74,8 @@ const MyBookings = () => {
   const handleEdit = (booking) => {
     setEditingBooking(booking);
     setFormData({
-      service: booking.service,
-      date: booking.date.slice(0, 10),
+      service: booking.service || '',
+      date: booking.date?.slice(0, 10) || '',
       time: booking.time || '',
       notes: booking.notes || '',
     });
@@ -96,24 +89,14 @@ const MyBookings = () => {
   };
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     setActionLoading(true);
     try {
-      const res = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/bookings/${editingBooking._id}`,
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
-
+      const res = await API.put(`/bookings/${editingBooking._id}`, formData);
       setBookings((prev) =>
         prev.map((b) => (b._id === editingBooking._id ? res.data : b)),
       );
@@ -212,43 +195,63 @@ const MyBookings = () => {
         <p className="no-bookings">You have no bookings yet.</p>
       ) : (
         <ul className="bookings-list">
-          {bookings.map((booking) => (
-            <li key={booking._id} className="booking-card">
-              <div className="booking-info">
-                <p>
-                  <strong>Service:</strong> {booking.service}
-                </p>
-                <p>
-                  <strong>Date:</strong>{' '}
-                  {new Date(booking.date).toLocaleDateString()}
-                </p>
-                <p>
-                  <strong>Time:</strong> {booking.time || 'N/A'}
-                </p>
-                {booking.notes && (
+          {bookings.map((booking) => {
+            const statusKey = booking.status?.toLowerCase() || 'pending';
+            return (
+              <li key={booking._id} className="booking-card">
+                <div className="booking-info">
                   <p>
-                    <strong>Notes:</strong> {booking.notes}
+                    <strong>Service:</strong> {booking.service}
                   </p>
-                )}
-              </div>
-              <div className="booking-actions">
-                <button
-                  className="btn btn-edit"
-                  onClick={() => handleEdit(booking)}
-                  disabled={actionLoading}
-                >
-                  Edit
-                </button>
-                <button
-                  className="btn btn-delete"
-                  onClick={() => handleDelete(booking._id)}
-                  disabled={actionLoading}
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
+                  <p>
+                    <strong>Date:</strong>{' '}
+                    {new Date(booking.date).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <strong>Time:</strong> {booking.time || 'N/A'}
+                  </p>
+                  <p>
+                    <strong>Status:</strong>{' '}
+                    <span
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        padding: '0.28rem 0.65rem',
+                        borderRadius: '999px',
+                        fontSize: '0.86rem',
+                        fontWeight: 700,
+                        ...statusStyles[statusKey],
+                      }}
+                    >
+                      {formatStatus(booking.status)}
+                    </span>
+                  </p>
+                  {booking.notes && (
+                    <p>
+                      <strong>Notes:</strong> {booking.notes}
+                    </p>
+                  )}
+                </div>
+                <div className="booking-actions">
+                  <button
+                    className="btn btn-edit"
+                    onClick={() => handleEdit(booking)}
+                    disabled={actionLoading}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn btn-delete"
+                    onClick={() => handleDelete(booking._id)}
+                    disabled={actionLoading}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

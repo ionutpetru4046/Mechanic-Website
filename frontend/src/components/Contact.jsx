@@ -1,7 +1,44 @@
+import { useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import API from '../api/api';
 import './Contact.css';
 
 function Contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState({ success: '', error: '', loading: false });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus({ success: '', error: '', loading: true });
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setStatus({ success: '', error: 'Please fill in every field.', loading: false });
+      return;
+    }
+
+    try {
+      const response = await API.post('/contact', {
+        name: name.trim(),
+        email: email.trim(),
+        message: message.trim(),
+      });
+
+      setStatus({ success: response.data.message, error: '', loading: false });
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (err) {
+      setStatus({
+        success: '',
+        error: err.response?.data?.message || err.message || 'Failed to send your message.',
+        loading: false,
+      });
+      console.error('Contact submit error:', err);
+    }
+  };
+
   return (
     <section className="contact section">
       <div className="section-inner contact-page">
@@ -38,6 +75,54 @@ function Contact() {
               </p>
             </div>
           </div>
+        </div>
+
+        <div className="contact-grid">
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <h3 className="contact-form-title">Send us a message</h3>
+            {status.error && <div className="contact-alert contact-alert--error">{status.error}</div>}
+            {status.success && <div className="contact-alert contact-alert--success">{status.success}</div>}
+
+            <label className="contact-field">
+              Name
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="contact-input"
+                placeholder="Your name"
+                required
+              />
+            </label>
+
+            <label className="contact-field">
+              Email
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="contact-input"
+                placeholder="you@example.com"
+                required
+              />
+            </label>
+
+            <label className="contact-field">
+              Message
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="contact-textarea"
+                placeholder="How can we help you today?"
+                rows="6"
+                required
+              />
+            </label>
+
+            <button type="submit" className="contact-submit" disabled={status.loading}>
+              {status.loading ? 'Sending...' : 'Send Message'}
+            </button>
+          </form>
         </div>
 
         <div className="map-container">

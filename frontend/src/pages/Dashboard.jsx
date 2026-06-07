@@ -74,7 +74,8 @@ function Dashboard() {
   }, [navigate]);
 
   const getStatusIcon = (status) => {
-    switch (status) {
+    const normalized = status?.toLowerCase();
+    switch (normalized) {
       case 'confirmed':
       case 'completed':
         return <CheckCircle size={14} />;
@@ -177,7 +178,7 @@ function Dashboard() {
             </div>
             <div className={styles.statContent}>
               <h3 className={styles.statNumber}>
-                {bookings.filter((b) => b.status === 'completed').length}
+                {bookings.filter((b) => b.status?.toLowerCase() === 'completed').length}
               </h3>
               <p className={styles.statLabel}>Completed</p>
             </div>
@@ -302,6 +303,19 @@ function Dashboard() {
                       ? 'Manage all customer appointments'
                       : 'Manage your appointments'}
                   </p>
+                </div>
+                <div className={styles.actionArrow}>
+                  <ArrowRight size={16} />
+                </div>
+              </Link>
+
+              <Link to="/profile" className={styles.actionCard}>
+                <div className={styles.actionIcon}>
+                  <User size={24} />
+                </div>
+                <div className={styles.actionContent}>
+                  <h4>My Profile</h4>
+                  <p>Update your account details</p>
                 </div>
                 <div className={styles.actionArrow}>
                   <ArrowRight size={16} />

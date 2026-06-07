@@ -18,7 +18,7 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
-  color: var(--color-text);
+  color: #4b5563; /* Override to fix dark gray on white for legibility */
   background: var(--color-bg);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -54,6 +54,7 @@ select {
   margin: 0 auto;
 }
 
+/* Improve section-eyebrow color for contrast if needed */
 .section-eyebrow {
   display: inline-block;
   font-size: 0.75rem;
@@ -68,14 +69,14 @@ select {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: var(--color-text);
+  color: #4b5563; /* Override to improve contrast if on light background */
   margin: 0 0 1rem;
   line-height: 1.2;
 }
 
 .section-subtitle {
   font-size: 1.0625rem;
-  color: var(--color-text-muted);
+  color: #6b7280; /* Muted but with improved contrast over #9ca3af */
   max-width: 560px;
   margin: 0 auto 2.5rem;
   text-align: center;
@@ -110,11 +111,11 @@ select {
 
 .btn-outline {
   background: transparent;
-  color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: #4b5563; /* Use improved readable dark gray for outline buttons */
+  border: 2px solid #cbd5e1;
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #fff;
+  background: rgba(203, 213, 225, 0.1);
+  border-color: #4b5563;
 }
