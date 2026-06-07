@@ -92,7 +92,6 @@ function Dashboard() {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
   };
 
   if (loading) {
