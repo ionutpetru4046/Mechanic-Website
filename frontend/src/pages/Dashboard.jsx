@@ -114,85 +114,6 @@ function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
-      {/* Sidebar */}
-      <aside className={styles.sidebar}>
-        <div className={styles.sidebarHeader}>
-          <div className={styles.logo}>
-            <Wrench size={28} />
-            <span>Expert Auto</span>
-          </div>
-          <div className={styles.userInfo}>
-            <div className={styles.userAvatar}>
-              <User size={20} />
-            </div>
-            <div className={styles.userDetails}>
-              <span className={styles.userName}>{user?.name}</span>
-              <span className={styles.userRole}>
-                {user?.role === 'admin' ? 'Admin' : 'Customer'}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <nav className={styles.sidebarNav}>
-          <Link
-            to="/dashboard"
-            className={`${styles.navLink} ${styles.active}`}
-          >
-            <BarChart3 size={18} />
-            <span>Dashboard</span>
-          </Link>
-          <Link to="/book-now" className={styles.navLink}>
-            <Plus size={18} />
-            <span>Book Service</span>
-          </Link>
-          <Link
-            to={user?.role === 'admin' ? '/admin/bookings' : '/my-bookings'}
-            className={styles.navLink}
-          >
-            <BookOpen size={18} />
-            <span>
-              {user?.role === 'admin' ? 'View Bookings' : 'My Bookings'}
-            </span>
-          </Link>
-          <Link to="/dashboard" className={styles.navLink}>
-            <TrendingUp size={18} />
-            <span>Analytics</span>
-          </Link>
-          <Link to="/dashboard" className={styles.navLink}>
-            <Settings size={18} />
-            <span>Settings</span>
-          </Link>
-        </nav>
-
-        <div className={styles.sidebarFooter}>
-          {/* 
-            Change: Add inline style to ensure button text/icon are visible in red,
-            and add fallback class if needed
-          */}
-          <button
-            onClick={handleLogout}
-            className={styles.logoutButton}
-            style={{
-              color: '#dc2626', // Tailwind red-600
-              border: '1px solid #dc2626',
-              background: 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontWeight: 600,
-              padding: '0.5rem 1rem',
-              cursor: 'pointer',
-            }}
-            aria-label="Sign Out"
-          >
-            <LogOut size={18} color="#dc2626" />
-            <span>Sign Out</span>
-          </button>
-        </div>
-      </aside>
-
-      {/* Main Content */}
       <main className={styles.main}>
         {/* Header */}
         <header className={styles.header}>
@@ -208,6 +129,14 @@ function Dashboard() {
                 <Plus size={16} />
                 Schedule Service
               </Link>
+              <button
+                onClick={handleLogout}
+                className={styles.secondaryButton}
+                type="button"
+              >
+                <LogOut size={16} />
+                Sign Out
+              </button>
             </div>
           </div>
         </header>
