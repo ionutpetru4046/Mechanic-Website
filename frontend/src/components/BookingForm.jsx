@@ -4,6 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import API from '../api/api';
 import styles from './BookingForm.module.css';
 
+const SERVICE_OPTIONS = [
+  'Oil Change',
+  'Brake Repair',
+  'Engine Diagnostics',
+  'Wheel Alignment',
+  'AC Repair',
+  'NCT Repair',
+  'Tyre Service',
+];
+
 function BookingForm() {
   const [service, setService] = useState('');
   const [date, setDate] = useState('');
@@ -18,27 +28,29 @@ function BookingForm() {
     e.preventDefault();
 
     if (!service || !date || !time) {
-      setError('Please fill in service, date, and time.');
+      setError('Please select a service, date, and time.');
       setSuccess('');
       return;
     }
 
     try {
-      const response = await API.post('/bookings', {
+      await API.post('/bookings', {
         service,
         date,
         time,
         notes,
       });
 
-      setSuccess('Booking successful!');
+      setSuccess('Booking submitted successfully. Redirecting to dashboard...');
       setError('');
       setService('');
       setDate('');
       setTime('');
       setNotes('');
 
-      navigate('/dashboard');
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 600);
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'Booking failed');
       setSuccess('');
@@ -60,15 +72,20 @@ function BookingForm() {
         <label htmlFor="service" className={styles.inputLabel}>
           Service
         </label>
-        <input
+        <select
           id="service"
           className={styles.input}
-          type="text"
           value={service}
           onChange={(e) => setService(e.target.value)}
-          placeholder="Service"
           required
-        />
+        >
+          <option value="">Choose a service</option>
+          {SERVICE_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
       <div className={styles.inputGroup}>
         <label htmlFor="date" className={styles.inputLabel}>
@@ -105,7 +122,7 @@ function BookingForm() {
           className={styles.textarea}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Notes"
+          placeholder="Any relevant details or car notes"
         />
       </div>
       <button className={styles.button} type="submit">
