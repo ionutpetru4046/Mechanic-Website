@@ -7,6 +7,7 @@ import {
   Calendar,
   Clock,
   User,
+  Users,
   Settings,
   LogOut,
   Plus,
@@ -128,6 +129,12 @@ function Dashboard() {
                 <Plus size={16} />
                 Schedule Service
               </Link>
+              {user?.role === 'admin' && (
+                <Link to="/admin" className={styles.secondaryButton}>
+                  <Users size={16} />
+                  Admin Panel
+                </Link>
+              )}
               <button
                 onClick={handleLogout}
                 className={styles.secondaryButton}
@@ -300,6 +307,21 @@ function Dashboard() {
                   <ArrowRight size={16} />
                 </div>
               </Link>
+
+              {user?.role === 'admin' && (
+                <Link to="/admin" className={styles.actionCard}>
+                  <div className={styles.actionIcon}>
+                    <Users size={24} />
+                  </div>
+                  <div className={styles.actionContent}>
+                    <h4>Admin Panel</h4>
+                    <p>Open the full admin dashboard</p>
+                  </div>
+                  <div className={styles.actionArrow}>
+                    <ArrowRight size={16} />
+                  </div>
+                </Link>
+              )}
 
               <div className={styles.actionCard}>
                 <div className={styles.actionIcon}>
