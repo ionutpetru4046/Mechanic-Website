@@ -2,6 +2,7 @@ import express from 'express';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/users.js';
 import bookingRouter from './routes/bookings.js';
+import contactRoutes from './routes/contact.js';
 import connectDB from './config/db.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -21,6 +22,7 @@ app.use(cookieParser());
 // ✅ Static CORS origin whitelist
 const allowedOrigins = [
   'http://localhost:5173',
+  'http://localhost:5174',
   'https://mechanic-website-tau.vercel.app',
   'https://mechanic-website-1pg8qmx0s-ionutpetru4046s-projects.vercel.app',
 ];
@@ -37,6 +39,7 @@ app.use(
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/bookings', bookingRouter);
+app.use('/api/contact', contactRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running 🟢');
