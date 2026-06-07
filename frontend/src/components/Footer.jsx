@@ -57,6 +57,10 @@ function serviceHref(service) {
 export function Footer() {
   const year = new Date().getFullYear();
 
+  // Google Maps iframe embed for the address
+  const MAP_EMBED_URL =
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.798098681139!2d-6.263573384346726!3d53.35902898236192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e378b0c7c11%3A0x418d2817a5e214c2!2s59B%20Dorset%20Street%20Lower%2C%20Inn%27s%20Quay%2C%20Dublin%201%2C%20D01%20C5R3%2C%20Ireland!5e0!3m2!1sen!2sie!4v1717133412323!5m2!1sen!2sie';
+
   return (
     <footer className="footer">
       <div className="footer__accent" aria-hidden="true" />
@@ -88,6 +92,19 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+
+            <div className="footer__map-wrapper" style={{ marginTop: '1rem' }}>
+              <iframe
+                title="Expert Automotive Location on Google Maps"
+                src={MAP_EMBED_URL}
+                width="100%"
+                height="180"
+                style={{ border: 0, borderRadius: '8px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
           </div>
 
           <nav className="footer__nav" aria-label="Quick links">
