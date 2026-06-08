@@ -10,10 +10,12 @@
 .heroBg {
   position: absolute;
   inset: 0;
-  background-image: url('/background-image.avif');
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.02);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  /* remove any background-image, background-size, background-position from here */
 }
 
 .heroOverlay {
