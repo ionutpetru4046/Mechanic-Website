@@ -7,6 +7,10 @@ import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import styles from './Home.module.css';
 
+// Use a public image path or reference (relative to /public/)
+// If you want to use a public asset, use "/hero-bg.jpg" and place the image in frontend/public/
+const heroBgImage = '/hero-bg.avif'; // Make sure this file exists in "frontend/public/"
+
 function Home() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -27,7 +31,14 @@ function Home() {
   return (
     <>
       <Element name="top" className={styles.hero}>
-        <div className={styles.heroBg} aria-hidden="true" />
+        {/* ✅ img instead of div: discoverable in HTML, fetchPriority applied, no lazy load */}
+        <img
+          src={heroBgImage}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className={styles.heroBg}
+        />
         <div className={styles.heroOverlay} aria-hidden="true" />
         <div className={styles.heroContent}>
           <span className={styles.badge}>Dublin · Trusted since 2004</span>
