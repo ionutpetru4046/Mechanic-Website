@@ -111,7 +111,6 @@ select {
 
 .btn-outline {
   background: transparent;
-  color: #4b5563; /* Use improved readable dark gray for outline buttons */
   border: 2px solid #cbd5e1;
 }
 
