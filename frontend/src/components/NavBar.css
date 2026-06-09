@@ -36,9 +36,9 @@
 }
 
 .navbar__logo {
-  height: 48px;
+  height: 64px;         /* Increased from 48px to 64px */
   width: auto;
-  max-width: 160px;
+  max-width: 220px;     /* Increased from 160px to 220px */
   object-fit: contain;
   border-radius: var(--radius-sm);
 }
