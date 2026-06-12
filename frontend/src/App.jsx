@@ -24,6 +24,8 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminBookings from './pages/admin/AdminBookings';
 import AdminRoute from './routes/AdminRoute';
 
+import NotFound from './components/NotFound';
+
 import './index.css';
 
 function App() {
@@ -83,6 +85,9 @@ function App() {
             </AdminRoute>
           }
         />
+
+        {/* NotFound Route */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {!hideNavFooter && <Footer />}
