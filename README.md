@@ -7,7 +7,7 @@
 </p>
 
 <div align="center">
-  <img src="./frontend/public/background-image.avif" alt="Expert Automotive Homepage" width="90%" />
+  <img src="./frontend/hero-bg.avif" alt="Expert Automotive Homepage" width="90%" />
 </div>
 
 ---
