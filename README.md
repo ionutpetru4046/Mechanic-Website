@@ -21,7 +21,6 @@
 ## 🚀 Features
 
 - 🎨 Fully responsive modern UI
-- 🌙 Light/Dark Mode toggle
 - 👤 Register & Login (JWT Authentication)
 - 📅 Booking system (Coming soon)
 - 💬 Real-time chat support (Planned)
@@ -51,6 +50,3 @@
 - 🌐 Render for backend hosting
 
 ---
-
-## 📁 Project Structure (Frontend)
-
